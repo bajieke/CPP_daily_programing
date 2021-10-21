@@ -1,0 +1,34 @@
+//分文件编写
+
+//---------------------main.cpp----------------
+#include<iostream>
+using namespace std;
+#include"Swap.h"
+
+int main()
+{
+    int a=10;
+    int b=20;
+
+    Swap(a,b);
+
+    cout<<a<<endl;
+    cout<<b<<endl;
+
+}
+
+//------------------Swap.h------------------
+#include<iostream>
+using namespace std;
+
+void Swap(int&a,int&b);
+
+//-----------------Swap.cpp---------------
+#include"Swap.h"
+
+void Swap(int&a,int&b)
+{
+   int temp=a;
+   a=b;
+   b=temp;
+}
