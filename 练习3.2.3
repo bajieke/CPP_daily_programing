@@ -1,0 +1,51 @@
+//—————————————————————3.2.3练习———————————
+#include<iostream>
+#include<string>
+using std::cin;
+using std::cout;
+using std::endl;
+using std::string;
+
+int main()
+{
+    string str="I like you.";
+
+    //练习3.8
+    //1.
+    for(char &c:str)
+        c='x';
+    
+    cout << "替代后: " <<str<< endl;
+  
+
+    //2
+    string::size_type index=0;
+    while(index<str.size())
+    {
+        str[index++]='x';
+    }
+    cout << "替代后: " <<str<< endl;
+   
+-
+    //3
+    for(string::size_type index=0;index<str.size();index++)
+        str[index]='x';
+        
+    cout << "替代后: " <<str<< endl;
+    
+    
+  
+
+    //练习3.11
+    const string s="uuu";
+    for(auto &c:s)
+    {
+        //c='a';   //非法改变
+    }
+    
+    return 0;
+}
+
+
+
+    
