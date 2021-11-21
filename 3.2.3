@@ -1,0 +1,81 @@
+#include<iostream>
+#include<string>
+using std::cin;
+using std::cout;
+using std::endl;
+using std::string;
+
+int main()
+{
+    
+    string str(" some string .");
+    
+    for(auto c:str)
+    {
+        cout << "每一个字符: " << c <<endl;
+    }
+    
+    
+    
+    //处理每个字符，找出string中标点符号的个数
+    string str("Hello & Kitty...");
+    
+    decltype(str.size()) punct_cnt=0;
+    
+    for(auto c:str)
+    {
+        if(ispunct(c))
+            punct_cnt++;
+    }
+    cout << punct_cnt  
+         <<" punctuation characters in "<<str<<endl;
+    
+
+
+
+    //改变string中的字符，小写转换成大写
+    string str("Hello Kitty...");
+    
+    for(auto &c:str)
+    {    
+        c=toupper(c);
+    }
+    
+    cout << "修改后:" <<str<< endl;
+    
+    
+    string str("a Hello Kitty..");
+    
+    if(!str.empty())
+        str[0]=toupper(str[0]);
+        
+    cout << "修改后" <<str<< endl;
+    
+    
+    string str("Hello Kitty..");
+    
+    for(decltype(str.size()) index=0;index<str.size() && !isspace(str[index]);index++)
+    {
+        str[index]=toupper(str[index]);
+    }
+    
+    cout << "修改后:" <<str<< endl;
+    
+    
+    
+    //转换16进制
+    const string hexDigits="0123456789ABCDEF";
+    
+    string result;
+    string::size_type n;
+    
+    while(cin>>n)
+    {
+        if(n<hexDigits.size())
+            result+=hexDigits[n];
+    }
+    
+    cout << "十六进制 : " << result<<endl;
+    
+    return 0;
+}
