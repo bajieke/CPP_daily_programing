@@ -1,0 +1,40 @@
+//——————————————3.4.2节练习————————————————————————
+int main()
+{
+    //练习3.24
+    int a;
+    vector<int> v;
+    
+    while(cin>>a)
+    {
+        v.push_back(a);
+    }
+    
+    //for(decltype(v.size()) index=0; index<v.size()-1; index++)
+     //   cout << v[index]+v[index+1]<<" ";
+    
+    
+    for(auto it=v.begin(); it!=v.end()-1; it++)
+        cout<<(*it)+(*(it+1))<<" ";
+    
+    
+    //练习3.25
+    vector<unsigned> scores(11,0);
+    unsigned grade;
+    auto it=scores.begin();
+    while(cin>>grade)
+    {
+        if(grade<=100)
+        {
+            if(it!=scores.end())
+            {
+                (*(it+grade/10))++;
+            }
+        }
+    }
+    
+    for(auto i:scores)
+        cout << i << " ";
+
+    return 0;
+}
