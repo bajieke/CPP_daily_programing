@@ -1,0 +1,106 @@
+#include<iostream>
+#include<vector>
+#include<string>
+
+using std::cin;
+using std::cout;
+using std::endl;
+
+using std::vector;
+using std::string;
+
+
+string sa[10];
+int ia[10];
+//——————————————3.5.2节练习——————————
+int main()
+{
+    string sa2[10];
+    int ia2[10];
+    unsigned ia3[16];
+    
+    //for(decltype(sa.size()) index=0; index<sa.size(); idex++)
+    //    cout << sa[index] << endl;
+    
+    
+    for(int i=0; i<10; i++)
+        cout<<sa[i]<<"k";
+        
+    cout << "———————————————" << endl;
+    
+        
+    for(int i=0; i<10; i++)
+        cout<<sa2[i]<<"k";
+        
+    cout << "———————————————————————————" << endl;
+    
+    
+    
+    
+    for(int i=0; i<10; i++)
+        cout<<ia[i]<<"r";
+        
+    cout << endl<<"——————————————" << endl;
+    
+    
+    
+    for(int i=0; i<10; i++)
+        cout<<ia2[i]<<"r";
+        
+    cout << endl<<"——————————————————————" << endl;
+    
+    
+    for(int i=0; i<16; i++)
+        cout<<ia3[i]<<"r";
+        
+    cout << endl<<"——————————————————————" << endl;
+    
+   
+    string s;
+    for(auto ss:s)
+        cout << ss << "i";
+        
+    cout << "———————————" << endl;
+
+    
+    
+    
+    
+
+//——————————————————————————————————————————————
+
+    //unsigned scores[11]={ };
+    unsigned scores[11];  //会出现乱码
+    
+    unsigned grade;
+    while(cin>>grade)
+    {
+        if(grade<=100)
+        {
+            scores[grade/10]++;
+        }
+    }
+    
+    for(int i=0;i<11;i++)
+        cout << scores[i] << " ";
+
+
+
+    //测试
+    int sarray1[11]={ };   //全部为0
+    int sarray2[11];       //出现乱码
+    
+    for(int i=0;i<11;i++)
+        cout<<sarray1[i]<<"a";
+        
+    cout << endl;
+
+    for(int i=0;i<11;i++)
+        cout<<sarray2[i]<<"b";
+        
+        
+    return 0;
+}
+
+
+    
