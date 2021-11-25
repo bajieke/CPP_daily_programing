@@ -1,0 +1,66 @@
+bool Compare(int *arr1,int *arr2)
+{
+    bool equal=true;
+    for(int *p=arr1,*p2=arr2; p!=arr1+4,p2!=arr2+4; p++,p2++)
+    {
+        if(*p!=*p2)
+            equal=false;;
+    }   
+    return equal;
+}
+
+
+int main()
+{
+    //练习3.35
+    int arr[]={0,1,2,3,4,5,6,7,8,9};
+    
+    auto p=std::begin(arr);
+    auto e=std::end(arr);
+    
+    for(auto i:arr)
+        cout << i << " ";
+    cout << endl;
+    
+    while(p!=e)
+    {
+        *(p++)=0;
+        //p++;
+    }
+    
+    int size = std::end(arr)-std::begin(arr);
+    
+    for(auto p=arr; p!=arr+size; p++)
+        *(p++)=0;
+    
+    for(auto i:arr)
+        cout << i << " ";
+    cout << endl;
+    
+    
+    
+    //——————————练习3.36—————————
+    int arr1[]={1,2,3,4};
+    int arr2[]={0,2,4,6};
+    int arr3[]={1,2,3,4};
+    
+    bool equal=Compare(arr1,arr2);
+    
+    if(equal==true)
+        cout << "arr1=arr2" << endl;
+    else
+        cout << "arr1!=arr2" << endl;
+    
+    
+    
+    vector<int> v1={9,9,8,7};
+    vector<int> v2={3,3,8,7};
+    vector<int> v3={9,9,8,7};
+    
+    if(v1==v2)
+        cout << "v1=v2" << endl;
+    else
+        cout << "v1!=v2" << endl;    
+    
+    return 0;
+}
