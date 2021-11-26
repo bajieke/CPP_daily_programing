@@ -1,0 +1,65 @@
+
+//————————————————————3.5.5———————————————
+#include<iostream>
+#include<iterator>
+#include<vector>
+
+using std::cin;
+using std::cout;
+using std::endl;
+
+using std::vector;
+
+int main()
+{
+    int int_arr[]={0,1,2,3,4,5};
+    
+    //
+    vector<int> ivec(std::begin(int_arr),std::end(int_arr));
+    
+    for(auto i:ivec)
+        cout << i << " ";
+    cout << endl;   
+     
+    //    
+    vector<int> ivec2(int_arr+1,int_arr+5);
+    
+    for(auto i:ivec2)
+        cout << i << " ";
+    cout << endl; 
+ 
+    
+    
+    //3.42
+    vector<int> vec{1,2,3,4,5};
+
+    int arr[]={5,6,7,8,9};
+    int arr2[5];
+
+    auto n=sizeof(arr)/sizeof(&arr[0]);
+    
+    for(size_t i=0;i<n;i++)
+    {
+        arr[i]=vec[i];
+    }
+      
+    
+    for(size_t i=0; i!=vec.size(); i++)
+        arr2[i]=vec[i];
+    
+    
+    cout << "arr" << endl;
+    for(int i:arr)
+        cout << i << " ";
+    cout << endl;
+        
+        
+    cout << "arr2" << endl;   
+    for(int i:arr2)
+        cout << i << " ";
+   
+    return 0;
+}
+
+
+
