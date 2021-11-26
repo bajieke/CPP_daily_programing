@@ -1,0 +1,72 @@
+//————————————————————————3.5.4节————————————————
+#include<iostream>
+#include<cstring>
+#include<string>
+
+using std::cin;
+using std::cout;
+using std::endl;
+
+using std::string;
+
+int main()
+{
+    char ca[]={'c','+','+'};
+    cout << "strlen(ca)=" << strlen(ca) << endl;
+    
+    char ca2[]={'c','+','+','\0'};
+    cout << "strlen(ca2)=" << strlen(ca) << endl;
+    
+    
+    
+    //比较
+    string s1="a example string";
+    string s2="b example string";
+    
+    if(s1<s2)
+        cout << "s1<s2" << endl;
+    else
+        cout << "s1>=s2" << endl;
+  
+
+    //      
+    const char ca1[]="ca1 example";
+    const char ca2[]="ca2 example";
+    
+    if(strcmp(ca1,ca2)<0)
+        cout << "cal<ca2" << endl;
+    else
+        cout << "ca1>=ca2" << endl;
+        
+        
+        
+    char largeStr[50]="";
+    
+    strcpy(largeStr,ca1);
+    strcat(largeStr," ");
+    strcat(largeStr,ca2);
+    
+    for(auto c:largeStr)
+        cout << c;
+    
+    
+        
+    return 0;
+}
+
+//——————————3.5.4节练习——————————
+int main()
+{   
+    //3.37
+    const char ca[]={'h','e','l','l','o'};
+    //const char ca[]={'h','e','l','l','o','\0'};
+    
+    const char *pca=ca;
+    while(*pca)
+    {
+        cout << *pca;
+        pca++;
+    }
+    
+    
+}
