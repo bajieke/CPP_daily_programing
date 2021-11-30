@@ -1,0 +1,62 @@
+#include<iostream>
+#include<string>
+#include<vector>
+using std::cin;
+using std::cout;
+using std::endl;
+using std::string;
+using std::vector;
+
+int main()
+{/*
+    string str="    aaa bb v   ";
+    cout << str ;
+    cout << "&" << endl;
+    
+    
+    string str2;
+    cin>>str2;
+    cout << str2;
+    cout << "&" << endl;
+   
+//———————————————4.3节练习—————————————————
+    int n;
+    while(cin>>n && n!=42) 
+    {
+        cout << n << endl;
+    }
+    
+    int a,b,c,d;
+    cin>>a>>b>>c>>d;
+    
+    if(a>b && b>c && c>d)
+    {
+        cout << "满足规定条件！" << endl;
+    }
+    else
+    {
+        cout << "不满足条件！" << endl;
+    }
+    
+    
+    vector<int> vec(10);
+    vec={0,0};
+    for(auto i:vec)
+    {
+        cout << i << endl;
+    }
+    
+    //————————————————4.4节练习——————————————————
+    
+    int i=0;
+    if(42=i)
+    {
+        cout << "ppi" << endl;
+    }
+    
+    return 0;
+}
+
+
+
+
