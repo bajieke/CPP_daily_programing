@@ -1,0 +1,47 @@
+#include<iostream>
+#include<vector>
+#include<string>
+using std::endl;
+using std::cout;
+using std::cin;
+using std::vector;
+using std::string;
+
+int main()
+{
+    //—————————练习4.21———————————————
+    vector<int> vec={1,2,3,4,5};
+    
+    for(auto v:vec)
+    {
+        cout << v << " ";
+        auto temp=((v%2==0)?v:(v*2));
+        v=temp;
+        cout << v << endl<<endl;
+    }
+ 
+    
+    //—————————练习4.22———————————————
+    int grade;
+    cout << "请输入成绩: ";
+    cin>>grade;
+    //第一种方法
+    string sgrade=(grade>90)?"1 grade"
+                           :(grade>75)?"2 grade"
+                                      :(grade>60)?"3 grade":"failed grade";
+    cout << "成绩等级: " << sgrade << endl;
+    
+    //第二种方法
+    if(grade>90)
+        cout << "1 grade" << endl;
+    else if(grade>75)
+        cout << "2 grade" << endl;
+    else if(grade>60)
+        cout << "3 grade" << endl;
+    else
+        cout << "failed grade" << endl;
+
+
+
+    return 0;
+}
