@@ -1,0 +1,59 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+int main()
+{
+    //cout << (10 < 42)<<endl;
+    //cout<<42+10;
+
+    //————————————练习4.28——————————
+    int i=7;
+    int &ii=i;
+    int *p=&i;
+    
+    double d=7.8;
+    double &dd=d;
+    double *dp=&d;
+    
+    cout << "sizeof(char) = " << sizeof(char) << endl;
+    cout << "sizeof(int) = " << sizeof(int) << endl;
+    cout << "sizeof(long) = " << sizeof(long) << endl;
+    cout << "sizeof(double) = " << sizeof(double) << endl <<endl;
+    
+    cout << "sizeof(i) = " << sizeof(i) << endl;
+    cout << "sizeof(p) = " << sizeof(p) << endl;
+    cout << "sizeof(*p) = " << sizeof(*p) << endl;
+    cout << "sizeof(ii) = " << sizeof(ii) << endl <<endl;
+    
+    cout << "sizeof(d) = " << sizeof(d) << endl;
+    cout << "sizeof(dd) = " << sizeof(dd) << endl;
+    cout << "sizeof(dp) = " << sizeof(dp) << endl;
+    cout << "sizeof(*dp) = " << sizeof(*dp) << endl<<endl;
+    
+    //容器
+    vector<int>vec={1,2,3,4,5};
+    cout << "sizeof(vec) = " << sizeof(vec) << endl<<endl;
+    
+    
+    //数组
+    int ia[3][4]={{1,2,3,11},
+                  {4,5,6,12},
+                  {7,8,9,13}};
+            
+    cout << "sizeof(ia) = " << sizeof(ia)/4 << endl;
+    cout << "sizeof(*ia) = " << sizeof(*ia)/4 << endl;
+    cout << "sizeof(ia)/sizeof(*ia) = " << (sizeof(ia)/sizeof(*ia)) << endl;
+   
+
+    //——————————————练习4.29————————————
+    int x[10];
+    int *p=x;
+    
+    cout << "sizeof(x) = " << sizeof(x) << endl;
+    cout << "sizeof(*x) = " << sizeof(*x) << endl;
+    cout << "sizeof(p) = " << sizeof(p) << endl;
+    cout << "sizeof(*p) = " << sizeof(*p) << endl;
+    
+    return 0;
+}
