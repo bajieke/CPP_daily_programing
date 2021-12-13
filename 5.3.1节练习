@@ -1,0 +1,60 @@
+#include<iostream>
+#include<vector>
+using std::cin;
+using std::cout;
+using std::endl;
+using std::vector;
+using std::string;
+//————————————————————5.3.1————————————————
+int main()
+{
+    const vector<string> scores={"F","D","C","B","A","A++"};
+    
+    cout << "请输入成绩: ";
+    int grade=0;
+    cin >> grade;
+    
+    string letterGrade;
+    
+    if(grade<60)
+    {
+        letterGrade=scores[0];
+    }
+    else
+    {
+        letterGrade=scores[(grade-50)/10];
+        if(grade!=100)
+        {
+            if((grade%10)>7)
+            {
+                letterGrade+="+";
+            }
+            else if((grade%10)<3)
+            {
+                letterGrade+"-";
+            }
+        }
+    }
+
+    cout << "成绩等级: " << letterGrade << endl;
+
+
+
+    //——————练习5.6——————————
+    const vector<string> scores2={"F","D","C","B","A","A+"};
+    
+    cout<<"请输入成绩: ";
+    int grade2=0;
+    cin >> grade2 ;
+    
+    string letterGrade2;
+    
+    letterGrade2=(grade2<60)?(scores2[0]):
+                                      ((grade2/10)>7)?(scores2[(grade2-50)/10]+="+"):
+                                                                                  (grade2<3)?(scores2[(grade2-50)/10)]+="-"));
+
+    cout << "成绩等级: " << letterGrade2 << endl;
+
+    //cout << "Hello,World!\n";
+    return 0;
+}
