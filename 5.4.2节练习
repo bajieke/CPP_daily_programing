@@ -1,0 +1,31 @@
+
+//——————————————————5.4.2节练习————————————————————
+#include<iostream>
+#include<vector>
+using std::cin;
+using std::cout;
+using std::endl;
+using std::vector;
+
+int main()
+{
+    vector<int>vec1={0,1,1,2};
+    vector<int>vec2={0,1,1,2,3,5,8};
+    
+    int count=0;
+    
+    for(int i=0;i!=vec1.size();++i)
+    {
+        if(vec1[i]==vec2[i])
+            count++;
+    }
+    
+    if(count==vec1.size())
+        cout << "vec1 是 vec2的前缀。" << endl;
+    else
+        cout << "vec1 不是 vec2的前缀！" << endl;  
+        
+    return 0;
+}
+
+
