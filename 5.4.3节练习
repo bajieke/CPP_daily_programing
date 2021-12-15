@@ -1,0 +1,49 @@
+/——————————————————5.4.3节练习————————————————————
+#include<iostream>
+#include<string>
+using std::cin;
+using std::cout;
+using std::endl;
+using std::string;
+
+int main()
+{    //—————————————5.4.4—————————
+    
+    string rsp;
+    
+    do{
+        int ival1,ival2;
+        cout << "请输入两个数: ";
+        cin>>ival1>>ival2;
+        cout << "ival1 + ival2 = " << (ival1+ival2) << endl;
+        
+        cout << "是否想继续输入(是:yes)" << endl;
+        cin>>rsp;
+    }while(!rsp.empty() && rsp[0]!='n');
+    
+    
+    
+    //练习5.19
+    string rsp;
+    
+    do{
+        string str1,str2;
+        cout << endl;
+        cout << "请输入两个string对象: ";
+        cin>>str1>>str2;
+        
+        if(str1.size()<str2.size())
+            cout << "较短的string: " << str1 << endl;
+        else if(str1.size()>str2.size())
+            cout << "较短的string: " << str2 << endl;
+        else
+            cout << "两个string对象一样长！" << endl;
+        
+        cout << endl;
+        cout << "是否继续输入(yes/no)" << endl;
+        cin>>rsp;
+        
+    }while(!rsp.empty() && rsp!="no");
+    
+    return 0;
+}
