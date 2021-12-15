@@ -1,0 +1,31 @@
+//———————————————————5.5.1节练习—————————————
+#include<iostream>
+#include<string>
+using std::cin;
+using std::cout;
+using std::endl;
+using std::string;
+    
+int main() 
+{
+    string str,prestr;
+    
+    while(cin>>str)
+    {
+        if(str==prestr)
+        {
+            cout << "重复单词出现: " << prestr << endl;
+            break;
+        }
+        
+        prestr=str;
+    }
+    
+    if(str!=prestr)
+    {
+        cout << "没有任何单词是重复的！" << endl;
+    }
+
+    return 0;
+}
+
