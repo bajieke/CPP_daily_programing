@@ -1,0 +1,58 @@
+//————————————————6.2.2节练习——————————————
+#include<iostream>
+using std::cin;
+using std::cout;
+using std::endl;
+using std::string;
+
+int reset(int &val)
+{
+    val=0;
+    return val;
+}
+
+string::size_type find_char(const string &str,char ch,int &occurs)
+{
+    auto ret=str.size();
+    occurs=0;
+    for(decltype(ret) i=0; i<str.size(); ++i)
+    {
+        if(str[i]==ch)
+        {
+            if(ret==str.size())
+                ret=i;
+            ++occurs;
+        }
+    }
+    return ret;
+}
+
+int main()
+{ 
+    //———————————练习6.11—————————————
+    int j=10;
+    cout << "j = " << j << endl;
+    
+    //int ia=reset(5);   错误
+    int ib=reset(j);
+    
+    cout << "j = " << j << endl;
+    cout << "ib = " << ib << endl;
+
+
+
+    //——————————练习6.15—————————————
+    string str="string on your wayo";
+    int count=0;
+    
+    decltype(str.size()) index=find_char(str,'o',count);
+    
+    cout << "index = " << index << endl;
+    cout << "count = " << count <<endl;
+
+    return 0;
+}
+
+
+
+
