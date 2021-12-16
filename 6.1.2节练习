@@ -1,0 +1,35 @@
+//———————————————6.1.2节练习———————————————
+#ifndef CHAPTER6_H
+#define CHAPTER_H
+#include"Chapter6.h"
+
+void fact(int val);
+
+#endif
+
+
+
+
+//——————————————————————————————
+#include<iostream>
+using std::cin;
+using std::cout;
+using std::endl;
+
+int fact(int,int=100);
+
+int fact(int val=0,int val2)
+{
+    return val+val2;
+}
+
+int main()
+{
+    int i1=fact(5);
+    
+    cout << "i1 = " << i1 << endl;
+    return 0;
+}
+
+
+
