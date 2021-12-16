@@ -1,0 +1,29 @@
+//———————————————6.1节练习———————————————
+#include<iostream>
+using std::cin;
+using std::cout;
+using std::endl;
+
+int fact(int val)
+{
+    int ret=1;
+    while(val>1)
+    {
+        cout << val << endl;
+        ret*=val--;
+    }
+    return ret;
+}
+
+int main()
+{
+    cout << "请输入一个数字: ";
+    int val;
+    cin >> val;
+    
+    int j=fact(val);
+    cout << "输入数字的阶乘 !" << val << " = " << j << endl;
+    
+    return 0;
+}
+
