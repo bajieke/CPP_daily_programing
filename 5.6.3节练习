@@ -1,0 +1,57 @@
+
+//——————————————————5.6.3节练习——————————————
+#include<iostream>
+#include<string>
+#include<stdexcept>
+using std::cin;
+using std::cout;
+using std::endl;
+
+int main()
+{ 
+    //——————————————练习5.24————————————
+    int a,b;
+    cout << "请输入两个数: ";
+    cin>>a>>b;
+    
+    if(b==0)
+    {
+        throw std::runtime_error("\n————异常警告: 被除数为0！————");
+    }
+    else
+    {
+        cout << "a/b = " << (a/b) << endl;
+    }
+
+
+    //——————————————练习5.25—————————————
+    int a,b;
+    cout << "请输入两个数: ";
+    
+    while(cin>>a>>b)
+    {
+        try{
+            if(b==0)
+                throw std::runtime_error("\n————异常警告: 被除数为0！————");
+            else
+            {
+                cout << "a/b = " << (a/b) <<endl;
+                break;
+            }   
+        }catch(std::runtime_error err){
+            
+            cout << err.what()
+                 << "\n是否继续输入(y/n)"<<endl;
+            char ch;
+            cin >> ch;
+            if(ch=='n')
+            {
+                break;
+            }
+        }//catch
+    }//while
+    
+   
+    
+    return 0;
+} 
