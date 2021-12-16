@@ -1,0 +1,61 @@
+//———————————————6.1.1节练习———————————————
+
+#include<iostream>
+using std::cin;
+using std::cout;
+using std::endl;
+
+//函数形参
+int fact0(int val0)
+{
+    return val0++;
+}
+
+//局部对象
+int fact1()
+{
+    int ret=1;
+    return ret++;
+}
+
+//静态局部变量
+int fact2()
+{
+    static int ret=1;
+    return ret++;
+}
+
+int main()
+{
+    int i0=fact0(1);
+    int i1=fact1();
+    int i2=fact2();
+    
+    cout << "i0 = " << i0 << endl;
+    cout << "i1 = " << i1 << endl;
+    cout << "i2 = " << i2 << endl<<endl;
+    
+    
+    i0=fact0(1);
+    i1=fact1();
+    i2=fact2();
+    
+    cout << "i0 = " << i0 << endl;
+    cout << "i1 = " << i1 << endl;
+    cout << "i2 = " << i2 << endl<<endl;
+    
+    i0=fact0(1);
+    i1=fact1();
+    i2=fact2();
+    
+    cout << "i0 = " << i0 << endl;
+    cout << "i1 = " << i1 << endl;
+    cout << "i2 = " << i2 << endl;
+    
+    
+    return 0;
+}
+
+
+
+
