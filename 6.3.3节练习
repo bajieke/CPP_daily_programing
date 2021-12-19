@@ -1,0 +1,43 @@
+
+//——————————————6.2.3节练习————————————————
+#include<iostream>
+#include<string>
+using std::cin;
+using std::cout;
+using std::endl;
+using std::string;
+
+bool isUpper(const string &str)
+{
+    for(decltype(str.size()) i=0; i<str.size(); ++i)
+    {
+        if(isupper(str[i]))
+            return true;
+    }
+    return false;
+}
+
+void isLower(string &str)
+{
+    for(decltype(str.size()) i=0; i<str.size(); ++i)
+    {
+        str[i]=tolower(str[i]);
+    }
+}
+
+int main()
+{
+    //——————————————练习6.17——————————
+    string str="HelloKitty";
+    cout << "str = " << str << endl;
+    
+    
+    cout << "str 中有大写字母 :" << ((isUpper(str))?"true":"false") <<endl;
+    
+    
+    isLower(str);
+    cout << "str = " << str << endl;
+    
+    
+    return 0;
+}
