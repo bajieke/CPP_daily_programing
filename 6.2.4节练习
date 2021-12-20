@@ -1,0 +1,65 @@
+/*
+//—————————————6.2.4节练习——————————————
+#include<iostream>
+using std::cin;
+using std::cout;
+using std::endl;
+
+int larger(const int a,const int const *p)
+{
+    return (a>*p) ? a : *p;
+}
+
+void swap(int *(&p1),int *(&p2))
+{
+    int *temp=p1;
+    p1=p2;
+    p2=temp;
+}
+
+//void print(const int ia[])
+//void print(const int ia[10])
+//void print(const int *ia)
+void print(const int (&arr)[5])
+{
+    for(size_t i=0; i!=5; ++i)
+        cout << arr[i] << " ";
+    cout << endl;
+}
+
+int main()
+{
+    //—————————————练习6.21———————————
+    int a=19;
+    int b=15,*p=&b;
+
+    int higher=larger(a,p);
+    cout << "higher = " << higher << endl;
+    
+    
+    //—————————————练习6.22———————————
+    int ia=3,ib=4;
+    int *pa=&ia,*pb=&ib;
+    
+    cout << "&ia=" << &ia << endl;
+    cout << "pa= " << pa << endl;
+    cout << "&ib=" << &ib << endl;
+    cout << "pb= " << pb << endl << endl;
+    
+    swap(pa,pb);
+    
+    cout << "&ia=" << &ia << endl;
+    cout << "pa= " << pa << endl;
+    cout << "&ib=" << &ib << endl;
+    cout << "pb= " << pb << endl << endl;
+    
+    
+    
+    //—————————————练习6.24———————————
+    int ia[5]={1,2,3,4,5};
+    
+    print(ia);
+    
+    
+    return 0;
+}
