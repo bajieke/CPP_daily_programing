@@ -1,0 +1,27 @@
+//—————————————6.2.5节练习———————————
+#include<iostream>
+using std::cin;
+using std::cout;
+using std::endl;
+
+int main(int argc,int **argv)
+{
+    std::string str;
+    
+    //argv[0]="prog";
+    //argv[1]="-d";
+    //argv[2]="-o";
+    //argv[3]="ofile";
+    //argv[4]="data0";
+    //argv[5]="0";
+    
+    
+    for(size_t i=1; i!=argc; ++i)
+        str += std::string(argv[i]) + " ";
+    
+    cout << "str = " << str << endl;
+    
+   
+   
+    return 0;
+}
