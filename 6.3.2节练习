@@ -1,0 +1,78 @@
+//—————————————————6.3.2节练习———————————
+#include<iostream>
+#include<string>
+#include<vector>
+using std::cin;
+using std::cout;
+using std::endl;
+using std::string;
+using std::vector;
+
+bool str_subrange(const string &str1,const string &str2)
+{
+    if(str1.size()==str2.size())
+        return str1==str2;
+    
+    auto size = (str1.size()<str2.size()) ? str1.size() : str2.size();
+
+    for(decltype(size) i=0; i!=size; ++i)
+    {
+        if(str1[i] != str2[i])
+            //return;
+            return false;
+    }
+    
+    return true;
+}
+
+//递归打印vector
+void print(const vector<int> &vec,int i)
+{
+    if(i!=vec.size())
+    {   //先打印，再递归
+        //每次递归之前把当前值打印出来
+        cout << vec[i] << endl;
+        print(vec,i+1);
+        //print(vec,++i);
+    }
+}
+
+int factorial(int val)
+{
+    //递归结束条件，val==1的时候
+    if(val>1)
+        return factorial(val-1) * val;
+        
+        //如果是(--val),则val永远不会改变
+        //return factorial(--val) * val;
+        
+    return 1;
+}
+
+
+
+int main()
+{
+    //—————————————————练习6.30———————————
+    string str1 = "here";
+    string str2 = "here you are";
+    
+    
+    cout << "bool = " << str_subrange(str1,str2) << endl;
+
+    //—————————————————练习6.33———————————
+    vector<int> vec={4,5,6,7,8,9,10,11,12};
+
+    print(vec,0);
+    
+    
+    //——————————递归打印数的阶乘—————————
+    
+    int value = 5;
+    
+    cout << value << "的阶乘: " << factorial(value) << endl;
+    
+    
+
+    return 0;
+}
