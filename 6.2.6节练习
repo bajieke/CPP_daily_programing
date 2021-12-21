@@ -1,0 +1,25 @@
+//—————————————6.2.6节练习———————————
+#include<iostream>
+#include<initializer_list>
+using std::cin;
+using std::cout;
+using std::endl;
+
+int Sum(std::initializer_list<int> const &arr)
+{
+    int sum=0;
+    for(auto ia:arr)
+        sum+=ia;
+    return sum;
+}
+
+int main()
+{
+    auto arr={1,2,3,4,5};
+    auto brr={1,2,3};
+    
+    cout << "sum = " << Sum(arr) <<endl;
+    cout << "sum = " << Sum(brr) <<endl;
+
+    return 0;
+}
