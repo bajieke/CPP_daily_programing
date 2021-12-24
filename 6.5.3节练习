@@ -1,0 +1,55 @@
+//—————————————————————6.5.3节练习—————————————
+#include<iostream>
+#include<vector>
+#include<cassert>
+using std::cin;
+using std::cout;
+using std::endl;
+
+//#define NDEBUG
+
+void printVector(const std::vector<int>&vec,int i)
+{
+
+#ifndef NDEBUG
+    cout << "vec.size() = " << vec.size() << endl;
+#endif
+
+    if( i < vec.size() )
+    {
+        cout << vec[i] << endl << endl;
+        printVector(vec,i+1);
+    }
+}
+
+void printVector2(std::vector<int> &vec)
+{
+
+#ifndef NDEBUG
+    cout << "vec.size() = " << vec.size() << endl;
+#endif
+
+    if(!vec.empty())
+    {
+        int temp=vec.back();
+        vec.pop_back();
+        cout << temp << endl <<endl;
+        printVector2(vec);
+    }
+}
+
+
+int main()
+{
+    std::vector<int> vec = {50,60,70,80,90,100};
+    
+    //printVector(vec,0);
+    
+    printVector2(vec);
+    
+    return 0;
+}
+
+
+
+
