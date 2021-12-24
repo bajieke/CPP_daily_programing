@@ -1,0 +1,58 @@
+//—————————————————————6.6节练习—————————————
+#include<iostream>
+#include<vector>
+#include<cassert>
+using std::cin;
+using std::cout;
+using std::endl;
+
+void f()
+{
+    cout << "f()" << endl;
+}
+
+void f(int a)
+{
+    cout << "f(int)" << endl;
+}
+
+void f(int a,int b)
+{
+    cout << "f(int,int)" << endl;
+}
+
+void f(double a,double b=3.14)
+{
+    cout << "f(double,double)" << endl;
+}
+
+int main()
+{
+    cout << "f(4) " ;
+    f(4);
+    
+    
+    cout << "f(4.5) " ;
+    f(4.5);
+    
+    
+    cout << "f(4,4) " ;
+    f(4,4);
+    
+    cout << "f(4.5,7.9)" ;
+    f(4.5,7.9);
+    
+     
+    
+    //无法匹配
+    cout << "f(4,4.5) " ;
+    //f(4,4.5);
+    
+    
+    cout << "f(4.5,4) " ;
+    //f(4.5,4);
+    
+    
+   
+    return 0;
+}
