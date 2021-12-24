@@ -1,0 +1,35 @@
+//—————————————————————6.5.2节练习—————————————
+#include<iostream>
+#include<string>
+using std::cin;
+using std::cout;
+using std::endl;
+using std::string;
+
+//——————————练习6.44——————————
+inline bool isShorter(const string &str1,const string &str2)
+{
+    return (str1.size()<str2.size()) ? true : false;
+}
+
+//——————————练习6.46——————————
+constexpr bool isShorter(const string &str1,const string &str2)
+{
+    return (str1.size()<str2.size()) ? true : false;
+}
+
+int main()
+{
+    const string str1="cc";
+    const string str2="BBQ";
+
+    //bool newbool = isShorter("he","Obama");
+    bool oldbool = isShorter(str1,str2);
+    
+    
+    //cout << "isShorter() = " << newbool << endl;
+
+    cout << "isShorter() = " << oldbool << endl;
+
+    return 0;
+}
