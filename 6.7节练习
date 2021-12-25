@@ -1,0 +1,54 @@
+//———————————————————6.7节练习———————————
+#include<iostream>
+#include<vector>
+using std::cin;
+using std::cout;
+using std::endl;
+
+
+int func(int a,int b);
+
+int funcAdd(int a,int b)
+{
+    return a+b;
+}
+
+int funcSub(int a,int b)
+{
+    return a-b;
+}
+
+int funcMul(int a,int b)
+{
+    return a*b;
+}
+
+int main()
+{
+    //练习6.54
+    using vp=int(*)(int,int);
+    
+    std::vector<vp> vpp;
+    
+    
+    
+    //练习6.55
+    vpp.push_back(funcAdd);
+    vpp.push_back(funcSub);
+    vpp.push_back(funcMul);
+      
+    
+    //练习6.56
+    int i1 = funcAdd(10,20);
+    
+    cout << "i1 = " << i1 << endl;
+    
+    
+    cout << "调用vector对象输出每个元素" << endl;
+    for( vp vv:vpp)
+    {
+        cout << (*vv)(10,20) <<endl;
+    }
+    
+    return 0;
+}
