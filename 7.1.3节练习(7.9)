@@ -1,0 +1,38 @@
+#include<iostream>
+using std::cin;
+using std::cout;
+using std::endl;
+
+struct Person{
+    //成员函数
+    const std::string& get_name() const { return this->name; }
+    const std::string& get_address() const { return this->address; }
+    
+    //数据成员
+    std::string name;
+    std::string address;
+};
+
+std::istream& read(std::istream& in,Person& temp)
+{
+    in>>temp.name>>temp.address;
+    return in;
+}
+
+std::ostream& print(std::ostream& out,const Person& temp)
+{
+    out<<temp.get_name()<<" "<<temp.get_address();
+    return out;
+}
+
+int main()
+{
+    Person trans;
+    
+    read(cin,trans);
+    
+    print(cout,trans);
+
+    
+    return 0;
+}
