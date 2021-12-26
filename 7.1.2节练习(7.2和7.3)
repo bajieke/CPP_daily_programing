@@ -1,0 +1,60 @@
+//—————————7.1.2节练习———————————
+#include<iostream>
+using std::cin;
+using std::cout;
+using std::endl;
+
+//——————————练习7.2———————————
+struct Sales_data{
+    std::string isbn() const { return this->bookNo; }
+    Sales_data& combine(Sales_data &rhs);
+    
+    std::string bookNo;       //isbn
+    unsigned units_sold = 0;  //销售数量
+    double revenue = 0.0;       //收入
+};
+
+Sales_data& Sales_data::combine(Sales_data &rhs)
+{
+    this->units_sold += rhs.units_sold;
+    this->revenue += rhs.revenue;
+    return *this;
+}
+
+int main()
+{
+    //——————————练习7.3———————————
+    Sales_data total;
+    if(cin>>total.bookNo>>total.units_sold>>total.revenue)
+    {
+        Sales_data trans;
+        while(cin>>trans.bookNo>>trans.units_sold>>trans.revenue)
+        {
+            if(total.isbn()==trans.isbn())
+            {
+                total.combine(trans);
+            }
+            else
+            {
+                else
+            {
+                cout << "----------->" 
+                     <<total.bookNo<<" "
+                     <<total.units_sold<<" "
+                     <<total.revenue<<endl; 
+                
+                total=trans;
+            }
+        }
+        cout << "----------->" 
+             <<total.bookNo<<" "
+             <<total.units_sold<<" "
+             <<total.revenue<<endl;  
+    }
+    else
+    {
+        std::cerr<<"no data!"<<endl;
+    }
+
+    return 0;
+}
