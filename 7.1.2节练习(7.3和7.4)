@@ -1,0 +1,23 @@
+//—————————————————7.1.2节练习——————————————
+#include<iostream>
+using std::cin;
+using std::cout;
+using std::endl;
+
+struct Person{
+    //成员函数
+    std::string& get_name() const { return this->name; }
+    std::string& get_address() const { return this->address; }
+    
+    //数据成员
+    std::string name;
+    std::string address;
+};
+
+int main()
+{
+    
+
+    
+    return 0;
+}
