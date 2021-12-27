@@ -1,0 +1,106 @@
+#include<iostream>
+using std::cin;
+using std::cout;
+using std::endl;
+
+
+class Sales_data{
+//友元函数
+friend std::istream& read(std::istream& in,Sales_data& temp);
+friend std::ostream& print(std::ostream& out,const Sales_data& temp);
+friend std::ostream& print(std::ostream& out,const Sales_data& temp);
+
+public:
+    Sales_data() = default;
+    Sales_data(const std::string &s):bookNo(s) { }
+    Sales_data(const std::string &s,unsigned n,double p):
+              bookNo(s),units_sold(n),revenue(n*p) { }
+    Sales_data(std::istream &in);
+
+    std::string isbn() const { return this->bookNo; }
+    Sales_data& combine(Sales_data &rhs);
+    
+private:
+    std::string bookNo;       //isbn
+    unsigned units_sold = 0;  //销售数量
+    double revenue = 0.0;       //收入
+};
+
+
+//类的成员函数
+Sales_data& Sales_data::combine(Sales_data &rhs)
+{
+    this->units_sold += rhs.units_sold;
+    this->revenue += rhs.revenue;
+    return *this;
+}
+
+//类的接口函数
+std::istream& read(std::istream& in,Sales_data& temp)
+{
+    double price=0.0;
+    in>>temp.bookNo>>temp.units_sold>>price;
+    temp.revenue=price * temp.units_sold;
+    return in;
+}
+
+std::ostream& print(std::ostream& out,const Sales_data& temp) 
+{
+    out<<temp.isbn()<<" "<<temp.units_sold<<" " << temp.revenue<<endl;
+    return out;
+}
+
+Sales_data add(const Sales_data& sdata1,Sales_data& sdata2)
+{
+    Sales_data sum = sdata1;
+    sum.combine(sdata2);
+    return sum;
+}
+//构造函数
+Sales_data::Sales_data(std::istream &in)
+{
+    read(in,*this);
+}
+
+
+int main()
+{
+    Sales_data sdata1;
+    Sales_data sdata2("101");
+    Sales_data sdata3("102",15,100);
+    Sales_data sdata4(cin);
+    
+    print(cout,sdata1);
+    print(cout,sdata2);
+    print(cout,sdata3);
+    print(cout,sdata4);
+
+    cout << "请输入isbn , 销售量 ,单价" << endl;
+    Sales_data total(cin);
+    
+    //if(read(cin,total))
+    if(!total.isbn().empty())
+    {
+        while(cin)
+        {
+            Sales_data trans(cin);
+            if(total.isbn()==trans.isbn())
+            {
+                total.combine(trans);
+            }
+            else
+            {
+                cout << "------->";
+                print(cout,total)<<endl;
+                total=trans;
+            }
+        }
+        print(cout,total)<<endl;
+    }
+    else
+    {
+        std::cerr<<"no data!"<<endl;
+    }
+
+    return 0;
+}
