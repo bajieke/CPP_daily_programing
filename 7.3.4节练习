@@ -1,0 +1,34 @@
+#include<iostream>
+#include<string>
+using std::cin;
+using std::cout;
+using std::endl;
+
+class Sales_data
+{
+public:
+    Sales_data(std::string s="too"):bookNo(s) { cout << "调用Sales_data(string)" << s <<" "<< units_sold <<" "<< revenue << endl; }
+    Sales_data(std::string s,unsigned cnt,double price):
+               bookNo(s),units_sold(cnt),revenue(cnt*price) { cout << "调用Sales_data(string)" << s <<" "<< units_sold <<" "<< revenue << endl; }
+    Sales_data(std::istream& in==cin) { in>>bookNo; cout << bookNo << endl;}
+    
+private:
+    std::string bookNo;
+    unsigned units_sold = 0;
+    double revenue = 0.0;
+};
+
+
+
+int main()
+{
+    Sales_data item1;
+    Sales_data item2("10012");
+    Sales_data item3("10011",2,34.78);
+    
+    Sales_data item4(cin);
+
+    return 0;
+}
+
+
