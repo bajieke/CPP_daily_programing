@@ -1,0 +1,28 @@
+#include<iostream>
+using std::cin;
+using std::cout;
+using std::endl;
+
+struct X {
+    //定义f()
+    friend void f() { }
+    
+    //void x() { return f(); }   //×
+    
+    void g();
+    void h();
+};
+
+//定义了f(),也不能使用
+//void X::g() { return f(); }  //×
+
+void f();
+
+//先声明f()，才能使用
+void X::h() { return f(); }
+
+int main()
+{
+
+    return 0;
+}
