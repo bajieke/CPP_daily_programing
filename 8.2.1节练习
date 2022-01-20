@@ -1,0 +1,71 @@
+#include<iostream>
+using std::cin;
+using std::cout;
+using std::endl;
+
+#include<fstream>
+
+#include<vector>
+#include<string>
+using std::vector;
+using std::string;
+
+//-------------------------------------------------8.2.1节练习
+
+void ReadPrint()
+{
+	std::ifstream ifs;
+
+	ifs.open("D:/ttt/c.text", std::ios::in);
+	if (!ifs.is_open())
+	{
+		std::cerr << "文件打开失败！" << endl;
+		return;
+	}
+
+	string strBuf;
+	while(getline(ifs, strBuf))
+	{
+		cout << strBuf << endl;
+	}
+}
+
+//练习8.4
+void ReadFile(const string& filename, vector<string>& vec)
+{
+	std::ifstream ifs(filename);
+	if (ifs)
+	{
+		string buf;
+		//读取一行
+		while (getline(ifs, buf))
+		{
+			vec.push_back(buf);
+		}
+	}
+}
+
+//练习8.5
+void ReadFileWord(const string& filename, vector<string>& vec)
+{
+	std::ifstream ifs(filename);
+	if (ifs)
+	{
+		string buf;
+		//读取一个单词
+		while (ifs >> buf)
+			vec.push_back(buf);
+	}
+}
+
+
+
+int main()
+{
+	test();
+
+	vector<string> vec;
+	ReadFile("D:/ttt/b.text", vec);
+
+	return 0;
+}
