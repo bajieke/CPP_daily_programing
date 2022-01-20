@@ -1,0 +1,22 @@
+#include<iostream>
+using std::cin;
+using std::cout;
+using std::endl;
+
+//8.1
+std::istream& test(std::istream& in)
+{
+	std::string strBuf;
+	while (in >> strBuf)
+		cout << strBuf << endl;
+	in.clear();
+	return in;
+}
+
+int main()
+{
+	cout << "测试中：" << endl;
+	test(cin);
+
+	return 0;
+}
