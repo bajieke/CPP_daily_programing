@@ -1,0 +1,42 @@
+#include<iostream>
+#include<fstream>
+using std::cin;
+using std::cout;
+using std::endl;
+
+#include"Sales_data.h"
+
+int main(int argc, char** argv)
+{
+	std::ifstream ifs("D:/ttt/b.text", std::ifstream::in);
+
+	std::ofstream ofs("D:/ttt/c.text", std::ofstream::out);
+	//std::ofstream ofs("D:/ttt/c.text", std::ofstream::app);
+
+	Sales_data total;
+	if (read(ifs, total))
+	{
+		Sales_data trans;
+		while (read(ifs, trans))
+		{
+			if (total.isbn() == trans.isbn())
+			{
+				total.combine(trans);
+			}
+			else
+			{
+				print(ofs, total);
+				cout << "流程进行中..." << endl;
+				total = trans;
+			}
+		}
+		print(ofs, total);
+	}
+	else
+	{
+		std::cerr << "No data!" << endl;
+	}
+
+	return 0;
+
+}
