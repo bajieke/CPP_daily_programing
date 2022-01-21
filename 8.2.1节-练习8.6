@@ -1,0 +1,38 @@
+#include<iostream>
+#include<fstream>
+using std::cin;
+using std::cout;
+using std::endl;
+
+#include"Sales_data.h"
+
+int main(int argc, char** argv)
+{
+	std::ifstream ifs("D:/ttt/b.text",std::ifstream::in);
+
+	Sales_data total;
+	
+	if (read(ifs, total))
+	{
+		Sales_data trans;
+		while (read(ifs, trans))
+		{
+			if (total.isbn() == trans.isbn())
+			{
+				total.combine(trans);
+			}
+			else
+			{
+				print(cout, total);
+				total = trans;
+			}
+		}
+		print(cout, total);
+	}
+	else
+	{
+		std::cerr << "No data!" << endl;
+	}
+
+	return 0;
+}
