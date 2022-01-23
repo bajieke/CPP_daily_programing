@@ -1,0 +1,158 @@
+//--------------------------------------练习8.9-----------------------
+using std::cin;
+using std::cout;
+using std::endl;
+
+#include<string>
+#include<sstream>
+using std::string;
+using std::istream;
+
+istream& test(istream& in)
+{
+	string str;
+	while (in >> str)
+	{
+		cout << str << endl;
+	}
+
+	cout << in.rdstate() << endl;
+	in.clear();
+	cout << in.rdstate() << endl;
+	return in;
+}
+
+int main()
+{
+	std::istringstream inn("this is my name！");
+	test(inn);
+
+
+	return 0;
+}
+
+
+//-------------------------------练习8.10------------------------------
+
+
+
+#include<iostream>
+#include<vector>
+#include<fstream>
+#include<string>
+#include<sstream>
+using std::cin;
+using std::cout;
+using std::endl;
+using std::vector;
+using std::string;
+using std::ifstream;
+
+void test()
+{
+	ifstream ifs("D:/ttt/c.text");
+	if (!ifs)
+	{
+		std::cerr << "打开文件失败！" << endl;
+		return;
+	}
+
+	vector<string> svec;
+	string line, word;
+	while (getline(ifs, line))
+	{
+		svec.push_back(line);
+	}
+
+	for (auto str : svec)
+	{
+		std::istringstream inn(str);
+		while (inn >> word)
+		{
+			cout << word ;
+		}
+		cout << endl;
+	}
+}
+
+int main()
+{
+	test();
+
+	return 0;
+}
+
+
+//-------------------------------练习8.11-------------------------------------
+
+
+#include<iostream>
+#include<sstream>
+#include<string>
+#include<vector>
+using std::cin;
+using std::cout;
+using std::endl;
+
+struct Person {
+	std:: string name;
+	std::vector<std::string> vec;
+};
+
+void test01()
+{
+	std::vector<Person> PerInfo;
+	std::string line, word;
+	while (getline(cin, line))
+	{
+		std::istringstream record(line);
+		Person info;
+		record >> info.name;
+		while (record >> word)
+		{
+			info.vec.push_back(word);
+		}
+		PerInfo.push_back(info);
+	}
+}
+
+void test02()
+{
+	std::string line, word;
+	std::vector<Person> PerInfo;
+
+	std::istringstream record;
+
+	while (getline(cin, line))
+	{
+		record.str(line);
+		Person info;
+		record >> info.name;
+		while (record >> word)
+		{
+			info.vec.push_back(word);
+		}
+		PerInfo.push_back(info);
+		record.clear();
+	}
+
+	for (auto p : PerInfo)
+	{
+		cout << p.name << " ";
+		for (auto phone : p.vec)
+		{
+			cout << phone << " ";
+		}
+		cout << endl;
+	}
+
+}
+
+
+
+int main()
+{
+	test02();
+
+	return 0;
+}
