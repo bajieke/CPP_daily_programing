@@ -1,0 +1,80 @@
+//---------------------------------------------8.3.2节练习
+#include<iostream>
+#include<sstream>
+#include<fstream>
+#include<string>
+#include<vector>
+#include<cctype>
+using std::cin;
+using std::cout;
+using std::endl;
+
+struct Person {
+	std::string name;
+	std::vector<std::string> sphones;
+};
+
+bool valid(const std::string &str)
+{
+	return isdigit(str[0]);
+}
+
+std::string format(std::string str)
+{
+	std::string newstr;
+	newstr = str.substr(0, 3) + "-" + str.substr(3, 3);
+	return newstr;
+}
+
+void test01()
+{
+	std::ifstream ifs("D:/ttt/c.text");
+	if (!ifs)
+	{
+		std::cerr << "No data!" << endl;
+		return;
+	}
+
+	std::string line, word;
+	std::vector<Person> PerInfo;
+	std::istringstream record;
+	while (getline(ifs, line))
+	{
+		Person info;
+		record.str(line);
+		record >> info.name;
+		while (record >> word)
+		{
+			info.sphones.push_back(word);
+		}
+		PerInfo.push_back(info);
+		record.clear();
+	}
+
+	for (const auto &person : PerInfo)
+	{
+		std::ostringstream formatted, badNums;
+		for (const auto &phone : person.sphones)
+		{
+			if (!valid(phone))
+				badNums << " " << phone;
+			else
+				formatted << " " << format(phone);
+		}
+
+		if (badNums.str().empty())
+		{
+			cout << person.name << " " << formatted.str() << endl;
+		}
+		else
+			std::cerr << "error: " << person.name
+					  << badNums.str() << endl;
+	}
+}
+
+int main()
+{
+	test01();
+
+	return 0;
+}
