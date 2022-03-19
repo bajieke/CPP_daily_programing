@@ -1,0 +1,94 @@
+//11.1节练习
+
+#include<iostream>
+
+using std::cin;
+
+using std::cout;
+
+using std::endl;
+
+#include<map>
+
+#include<string>
+
+#include<set>
+
+using std::map;
+
+using std::string;
+
+using std::set;
+
+int main()
+
+{
+
+    //map
+
+    
+
+    map<string,size_t> map;
+
+    
+
+    string word;
+
+    while(cin >> word && word!="end") {
+
+        map[word]++;
+
+    }
+
+    
+
+    for(const auto& m:map) {
+
+        cout << m.first << " occurs " << m.second 
+
+             << ((m.second>1)? " times." : " time. ") <<endl;
+
+    }
+
+    
+
+    
+
+    //set
+
+    map<string,size_t> map2;
+
+    set<string> st = {"here","are","you"};
+
+   
+
+    
+
+    string word2;
+
+    while(cin >> word2 && word2!="end") {
+
+        if(st.find(word2) == st.end()) {
+
+            map2[word2]++;
+
+        }
+
+    }
+
+    
+
+    for(const auto& m2: map2) {
+
+        cout << m2.first << " occurs " << m2.second 
+
+             << ((m2.second>1)? " times." : " time. ") <<endl;
+
+    }
+
+    
+
+    return 0;
+
+}
+
