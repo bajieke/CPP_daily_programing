@@ -1,0 +1,116 @@
+//11.3.6节练习
+
+#include<iostream>
+
+using std::cin;
+
+using std::cout;
+
+using std::endl;
+
+map<string,string> buildMap(ifstream& map_file)
+
+{
+
+    map<string,string> trans_map;
+
+    string key;
+
+    string val;
+
+    
+
+    while(map_file>>key && getline(map_file,val))
+
+    {
+
+        if(val.size() > 0)
+
+        {
+
+            trans_map[key] = val.substr(1);
+
+        }
+
+        else
+
+        {    
+
+            throw runtime_error("no rule for "+key);
+
+        }
+
+    }
+
+    return trans_map;
+
+}
+
+const string&
+
+transform(const string& str,const map<string,string>& mp)
+
+{
+
+    auto it = mp.find(str);
+
+    if(it != mp.cend())
+
+        return it.first->second;
+
+    else
+
+        return str;
+
+}
+
+void word_transform(ifstream& map_file,ifstream& input) 
+
+{
+
+    auto trans_map = buildMap(map_file);
+
+    string text;
+
+    while(getline(input,text))
+
+    {
+
+        istringstrean istream(text);
+
+        bool firstwore = true;
+
+""        string word;
+
+        while(istream >> word)
+
+        {
+
+            if(firstword)
+
+                firstword = false;
+
+            else 
+
+                cout << " ";
+
+            
+
+            cout << tansform(word,trans_map);
+
+        }
+
+        cout << endl;
+
+    }
+
+}
+
+int main()
+
+{
+
+    return 0;
+
+}
+                
