@@ -1,0 +1,92 @@
+//11.4节练习
+
+#include<iostream>
+
+using std::cin;
+
+using std::cout;
+
+using std::endl;
+
+#include<string>
+
+#include<unordered_map>
+
+using std::string;
+
+void word_count()
+
+{
+
+    std::unordered_map<string,size_t> umap;
+
+    
+
+    string word;
+
+    while(cin>>word && word!="end") {
+
+        umap[word]++;
+
+    }
+
+    //for(string word; cin>>word; umap[word]++);
+
+    
+
+    for(const auto& um:umap) {
+
+        cout << um.first << " ";
+
+        cout << um.second << endl;
+
+    }
+
+}
+
+void wordTransformation()
+
+{
+
+    std::ifstream ifs_map("../data/word_transformation.txt"), ifs_content("../data/given_to_transform.txt");
+
+    if (!ifs_map || !ifs_content) {
+
+        std::cerr << "can't find the documents." << std::endl;
+
+        return;
+
+    }
+
+    
+
+    std::unordered_map<string, string> trans_map;
+
+    for (string key, value; ifs_map >> key && getline(ifs_map, value); )
+
+        if (value.size() > 1) trans_map[key] = value.substr(1).substr(0, value.find_last_not_of(' '));
+for (string text, word; getline(ifs_content, text); std::cout << std::endl)
+
+        for (std::istringstream iss(text); iss >> word; ) {
+
+            auto map_it = trans_map.find(word);
+
+            std::cout << (map_it == trans_map.cend() ? word : map_it->second) << " ";
+
+        }
+
+}
+
+int main()
+
+{
+
+    word_count();
+
+    
+
+    
+
+    return 0;
+
+}
