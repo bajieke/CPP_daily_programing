@@ -1,0 +1,68 @@
+//11.3.5节练习
+
+#include<iostream>
+
+using std::cin;
+
+using std::cout;
+
+using std::endl;
+
+#include<string>
+
+#include<map>
+
+#include<set>
+
+using std::string;
+
+using std::multimap;
+
+using std::set;
+
+int main()
+
+{
+
+    multimap<string,string> mtmap{{"张三","文学常识"},{"张三","文学馆"},
+
+            {"李四","里约红土"},{"王宇","资深吃货"},
+
+            {"张三","躲雨"}};
+
+    
+
+    auto beg = mtmap.find("张三");
+
+    multimap<string,string>::iterator end = mtmap.find("张三");
+
+    int count = mtmap.count("张三");
+
+    
+
+    while(count--) {
+
+        end++;
+
+    }
+
+    //end++;
+
+    
+
+    mtmap.erase(beg,end);
+
+    
+
+    for(auto const& mt:mtmap) {
+
+        cout << mt.first << " " << mt.second << endl;
+
+    }
+
+    
+
+    return 0;
+
+}
+
