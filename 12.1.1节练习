@@ -1,0 +1,78 @@
+//12.1.1节练习
+
+#include<iostream>
+
+using std::cin;
+
+using std::cout;
+
+using std::endl;
+
+#include<string>
+
+#include<vector>
+
+#include<initializer_list>
+
+using std::string;
+
+using std::vector;
+
+class strBlob {
+
+public:
+
+    typedef vector<string>::size_type size_type;
+
+    strBlob();
+
+    strBlob(std::initializer_list<string> il);
+
+    
+
+    size_type size() const { return data->size(); }
+
+    size_type empty() const { return data->empty(); }
+
+    
+
+    void push_back(const string& str) { data->push_back(str); }
+
+    void pop_back();
+
+    
+
+    string& front();
+
+    string& back();
+
+    const string& front() const;
+
+    const string& back() const;
+
+    
+
+private:
+
+    void check(size_type i,const string msg) const
+
+    {
+
+        if(i>=data->size()) 
+
+            throw std::out_of_range(msg);
+
+    }
+
+    
+
+private:
+
+    std::shared_ptr<vector<string>> data;
+
+};
+
+strBlob::strBlob():data(std::make_shared<vector<string>>() ) { }
+
+strBlob::strBlob(std::initializer_list<string> il):data(std::make_shared<vector<string>>(il)) { }
+
