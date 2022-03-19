@@ -1,0 +1,88 @@
+//10.4.1节练习
+
+//练习10.28
+
+#include<iostream>
+
+using std::cin;
+
+using std::cout;
+
+using std::endl;
+
+#include<vector>
+
+#include<list>
+
+using std::vector;
+
+using std::list;
+
+template<typename T>
+
+void print(const T& t)
+
+{
+
+    for(const auto& i:t) {
+
+        cout << i <<" ";
+
+    }
+
+    cout << endl;
+
+}
+
+int main()
+
+{
+
+    vector<int> v{1,2,3,4,5,6,7,8,9};
+
+    
+
+    //1
+
+    list<int> lst1;
+
+    copy(v.begin(),v.end(),inserter(lst1,lst1.begin()));
+
+    
+
+    print(lst1);
+
+    
+
+    
+
+    //2
+
+    list<int> lst2;
+
+    copy(v.begin(),v.end(),back_inserter(lst2));
+
+    
+
+    print(lst2);
+
+    
+
+    
+
+    //3
+
+    list<int> lst3;
+
+    copy(v.begin(),v.end(),front_inserter(lst3));
+
+    
+
+    print(lst3);
+
+    
+
+    return 0;
+
+}
+
