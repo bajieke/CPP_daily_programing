@@ -1,0 +1,151 @@
+//------------------Query.h-----------------------
+#pragma once
+#include<iostream>
+#include<memory>
+#include<vector>
+#include<string>
+#include<map>
+#include<set>
+#include<fstream>
+using namespace std;
+
+//---------------------
+class QueryResult;
+class Query
+{
+public:
+	using line_no = vector<string>::size_type;
+
+	Query(ifstream& ifs);
+
+	QueryResult query(const string& word) const;
+
+private:
+	//定义的智能指针
+	shared_ptr<vector<string>> file;
+	map<string, shared_ptr<set<line_no>>> wm;
+};
+
+//----------------
+class QueryResult
+{
+public:
+	QueryResult(string str,shared_ptr<vector<string>> f,shared_ptr<set<Query::line_no>> l):
+		sought(str),file(f),lines(l) { }
+
+	friend ostream& print(ostream& os,QueryResult& qr);
+
+private:
+	string sought;
+	shared_ptr<vector<string>> file;
+	shared_ptr<set<Query::line_no >> lines;
+};
+
+
+
+
+
+
+//---------------------QueryResult.cpp------------------------------
+#include"Query.h"
+#include<iostream>
+#include<fstream>
+#include<sstream>
+using namespace std;
+
+//Query类
+Query::Query(ifstream& ifs):file(new vector<string>)
+{
+	string text;
+	while (getline(ifs, text))
+	{
+		file->push_back(text);
+		int n = file->size() - 1;
+		istringstream stream(text);
+		string word;
+		while (stream >> word)
+		{
+			auto &sptr = wm[word];   //引用的类型可以改变  wm[word]
+			if (!sptr)
+				sptr.reset(new set<line_no>);
+			sptr->insert(n);
+		}
+	}
+}
+
+QueryResult Query::query(const string& word) const
+{
+	//局部静态变量 
+	static shared_ptr<set<line_no>> nodata(new set<line_no>);
+	auto ptr = wm.find(word);
+	if (ptr == wm.end())
+		return QueryResult(word, file, nodata);
+	else
+		return	QueryResult(word, file, ptr->second);
+}
+
+//QueryResult类的 friend函数
+ostream& print(ostream& os, QueryResult& qr)
+{
+	os << qr.sought << " occures " << qr.lines->size() << (((qr.lines->size()) > 1) ? " times." : " time.") << endl;
+	//qr.lines 是智能指针，需要解引用
+	for (auto num : *qr.lines)  
+	{
+		os << "line " << num + 1 << ": " << *(qr.file->begin() + num) << endl;
+	}
+	return os;
+}
+
+
+
+
+
+//-----------------------main.cpp----------------------
+#include"Query.h"
+#include<iostream>
+#include<fstream>
+#include<sstream>
+using namespace std;
+
+//Query类
+Query::Query(ifstream& ifs):file(new vector<string>)
+{
+	string text;
+	while (getline(ifs, text))
+	{
+		file->push_back(text);
+		int n = file->size() - 1;
+		istringstream stream(text);
+		string word;
+		while (stream >> word)
+		{
+			auto &sptr = wm[word];   //引用的类型可以改变  wm[word]
+			if (!sptr)
+				sptr.reset(new set<line_no>);
+			sptr->insert(n);
+		}
+	}
+}
+
+QueryResult Query::query(const string& word) const
+{
+	//局部静态变量 
+	static shared_ptr<set<line_no>> nodata(new set<line_no>);
+	auto ptr = wm.find(word);
+	if (ptr == wm.end())
+		return QueryResult(word, file, nodata);
+	else
+		return	QueryResult(word, file, ptr->second);
+}
+
+//QueryResult类的 friend函数
+ostream& print(ostream& os, QueryResult& qr)
+{
+	os << qr.sought << " occures " << qr.lines->size() << (((qr.lines->size()) > 1) ? " times." : " time.") << endl;
+	//qr.lines 是智能指针，需要解引用
+	for (auto num : *qr.lines)  
+	{
+		os << "line " << num + 1 << ": " << *(qr.file->begin() + num) << endl;
+	}
+	return os;
+}
