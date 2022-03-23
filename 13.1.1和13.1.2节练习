@@ -1,0 +1,46 @@
+//13.1.1节练习
+
+//13.1.2节练习
+
+#include<iostream>
+
+class HasPtr {
+
+public:
+
+    HasPtr(const string& s=string()):ps(new string(s)),i(0) { }
+
+    //拷贝构造函数
+
+    HasPtr(HasPtr& hp):ps(new string(*(hp.ps))),i(hp.i) { }
+
+    //赋值运算符重载
+
+    HasPtr& operator=(const HasPtr& rhp) {
+
+        string *tempPs = new string(*(rhp.ps));
+
+        ps = tempPs;
+
+        i = rhp.i;
+
+        return *this;
+
+    }
+
+private:
+
+    string  *ps;
+
+    int i;
+
+};
+
+int main()
+
+{
+
+    return 0;
+
+}
+
