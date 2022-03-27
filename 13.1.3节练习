@@ -1,0 +1,81 @@
+#include<iostream>
+#include<vector>
+using std::cout;
+using std::endl;
+
+struct My{
+public: 
+    My() { cout << "My() 构造函数" << endl; }
+    
+    My(My& my) { cout << "My(My& my) 拷贝构造函数" << endl;}
+    
+    My& operator=(const My& my) { cout << "My& operator=(My& my) 赋值运算符重新" << endl;
+                                  return *this; }
+   
+     ~My() { cout << "~My() 析构函数" << endl;}
+};
+
+void function(My my) 
+{
+    
+}
+
+void function2(My& my) 
+{
+    
+}
+
+void function3(My* my) 
+{
+    
+}
+
+void funcVector(My my)
+{
+    std::vector<My> vec;
+    //vec.reserve(1);
+    //vec.push_back(my);
+}
+
+int main()
+{
+    cout << "1--------" << endl;
+    My my;
+    
+    
+    cout << "2--------" << endl;
+    My my2(my);
+    
+    
+    cout << "3--------" << endl;
+    My my3=my2;
+    
+    
+    cout << "4--------" << endl;
+    My* my4 = new My;
+    
+    
+    cout << "5--------" << endl;
+    function(my);
+    
+    
+    cout << "6--------" << endl;
+    function2(my);
+    
+    
+    cout << "7--------" << endl;
+    function3(my4);
+    
+    
+    
+    cout << "8--------" << endl;
+    //funcVector(my);
+    
+    
+    
+    
+    cout << "--------" << endl;
+    return 0;
+    cout << "--------" << endl;
+}
+    
