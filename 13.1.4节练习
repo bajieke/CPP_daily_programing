@@ -1,0 +1,97 @@
+//13.1.4节练习
+
+
+//练习13.14
+#include<iostream>
+using std::cout;
+using std::endl;
+
+class numbered {
+public:
+    numbered() {
+        mysn = count++;
+    }
+
+public:
+    int mysn;
+    static int count;
+};
+
+int numbered::count = 1;
+
+void f(numbered s)
+{
+    cout << s.mysn << endl;
+}
+
+int main()
+{
+    numbered a;
+    numbered b=a;
+    numbered c=b;
+    f(a);
+    f(b);
+    f(c);
+   
+
+    return 0;
+}
+
+
+
+//练习13.15
+#include<iostream>
+using std::cout;
+using std::endl;
+
+class numbered {
+public:
+    numbered() {
+        mysn = count++;
+    }
+    
+    numbered(const numbered& n1) {
+        mysn = count++;
+    }
+
+public:
+    int mysn;
+    static int count;
+};
+
+int numbered::count = 1;
+
+void f(numbered s)
+{
+    cout << s.mysn << endl;
+}
+
+void f2(numbered& s)
+{
+    cout << s.mysn << endl;
+}
+
+int main()
+{
+    //练习13.15
+    numbered a;
+    numbered b=a;
+    numbered c=b;
+    f(a);
+    f(b);
+    f(c);
+   
+
+    //练习13.16
+    numbered a1;
+    numbered b1=a1;
+    numbered c1=b1;
+    f2(a1);
+    f2(b1);
+    f2(c1);
+    
+ 
+    return 0;
+}
+
+
