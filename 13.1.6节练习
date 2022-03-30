@@ -1,0 +1,40 @@
+//13.1.6练习
+#include<iostream>
+#include<string>
+using std::string;
+
+class Employee {
+public:
+    Employee();
+    Employee(const string& name);
+    
+    //阻止拷贝
+    Employee(const Employee& re) =delete;
+    Employee& operator=(const Employee& re) =delete;
+
+private:
+    string _name;
+    int _id;
+    static int unique_num;
+};
+
+int Employee::unique_num = 1;
+
+Employee::Employee()
+{
+    _id = unique_num;
+    unique_num++;
+}
+
+Employee::Employee(c    onst string& name)
+{
+    _name = name;
+    _id = unique_num;
+    unique_num++;
+}
+
+int main()
+{
+
+    return 0;
+}
