@@ -1,0 +1,51 @@
+//13.2.2节练习
+//练习13.27
+#include<iostream>
+
+class HasPtr {
+public:
+    //构造函数
+    HasPtr(const string& s=string()):ps(new string(s)),i(0),use(new size_t(1)) { }
+    
+    //拷贝构造
+    HasPtr(const HasPtr& hp):ps(hp.ps),i(hp.i),use(hp.use) { ++(*use); }
+    
+    //赋值运算符
+    HasPtr& operator=(HasPtr& rhp);
+    
+    //析构函数
+    ~HasPtr() {
+        if(*use == 0) {
+            delete ps;
+            delete use;
+        }
+    }
+private:
+    string *ps;
+    size_t i;
+    size_t *use; //引用计数
+    
+};
+
+HasPtr& HasPtr::operator=(HasPtr& rhp)
+{
+    //先递增右侧，引用计数
+    //再递减右侧，引用计数
+    ++(*rhp.use);
+    if(--(*use) == 0) {
+        delete ps;
+        delete use;
+    }
+    
+    this->ps = rhp.ps;
+    this->i = rhp.i;
+    this->use = rhp.use;
+    
+    return *this;
+}
+
+
+int main()
+{
+    return 0;
+}
