@@ -1,0 +1,78 @@
+//练习13.28
+#include<iostream>
+#include<string>
+using std::string;
+
+
+//类指针(共享)
+class TreeNode {
+public:
+    TreeNode():value(new string()),count(new int(1)),left(new TreeNode(0)),right(new TreeNode(0)) { }
+    TreeNode(const TreeNode& node):value(node.value),count(node.count),left(node.left),right(node.right) { ++*count; }
+    TreeNode& operator=(const TreeNode& rnode);
+    ~TreeNode()
+    {
+        if(--(*count) == 0) {
+            delete count;
+            delete left;
+            delete right;
+        }
+    }
+    
+private:
+    string value;
+    int *count;
+    TreeNode* left;
+    TreeNode* right;
+};
+
+TreeNode& operator=(const TreeNode& rnode)
+{
+    ++*rnodr.count;
+    if(--*count == 0) {
+        delete count;
+        delete left;
+        delete right;
+    }
+    
+    this->value = rnodr.value;
+    this->count = rnodr.count;
+    this->left = rnodr.left;
+    this->right = rnodr.right;
+    
+    return *this;
+}
+
+
+
+
+//类值(单独)
+class BinStrTree {
+public:
+    BinStrTree():root(new TreeNode()) { }
+    BinStrTree(BinStrTree& bst):root(new TreeNode(*bst.root)) { }
+    BinStrTree& operator=(const BinStrTree& rbst);
+    ~BinStrTree()
+    {
+        delete root;
+    }
+    
+private:
+    TreeNode* root;
+};
+
+BinStrTree& operator=(const BinStrTree& rbst)
+{
+    auto newp_root = new TreeNode(*rbst.root);
+    delete root;
+    root = newp_root
+    
+    return *this;
+}
+
+
+int main()
+{
+    return 0;
+}
+
