@@ -1,0 +1,147 @@
+//13.3节练习
+
+//练习13.30
+
+#include<iostream>
+
+#include<string>
+
+using std::string;
+
+class HasPtr {
+
+public:
+
+    HasPtr(string s = string()):ps(new string(s)),i(0),use(new size_t(1)) { }
+
+    
+
+    HasPtr(const HasPtr& h):ps(h.ps),i(h.i),use(h.use) {
+
+        ++(*use);
+
+    }
+
+    
+
+    HasPtr& operator=(const HasPtr& rhs);
+
+    HasPtr& operator=(HasPtr rhs);
+
+    
+
+    ~HasPtr() {
+
+        if((*use) == 0) {
+
+            delete ps;
+
+            delete use;
+
+        }
+
+    }
+
+    
+
+    void swap(HasPtr& p1,HasPtr& p2);
+
+    
+
+    void print();
+
+private:
+
+    string *ps;
+
+    size_t i;
+
+    size_t *use;
+
+};
+
+//HasPtr& HasPtr::operator=(const HasPtr& rhs)
+
+HasPtr& HasPtr::operator=(HasPtr rhs)
+
+{
+
+    //++(*rhs.use);
+
+    //if(--(*use) == 0) {
+
+    //    delete ps;
+
+    //    delete use;
+
+    //}
+
+    
+
+    //ps = rhs.ps;
+
+    //i = rhs.i;
+
+    //use = rhs.use;
+
+    swap(*this,rhs);
+
+    return *this;
+
+}
+
+void HasPtr::swap(HasPtr& p1,HasPtr& p2)
+
+{
+
+    using std::swap;
+
+    swap(p1.ps,p2.ps);
+
+    swap(p1.i,p2.i);
+
+}    
+
+void HasPtr::print()
+
+{
+
+    std::cout << *ps << std::endl;
+
+}
+
+int main()
+
+{
+
+    HasPtr p1("here");
+
+    HasPtr p2("who");
+
+    
+
+    p1.print();
+
+    p2.print();
+
+    
+
+    
+
+    p1.swap(p1,p2);
+
+    
+
+    p1.print();
+
+    p2.print();
+
+    
+
+    
+
+    
+
+    return 0;
+
+}
