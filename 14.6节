@@ -1,0 +1,146 @@
+//—————————————————14.6———————————————————
+
+class StrBlobPtr {
+
+public:
+
+    StrBlobPtr& operator++();
+
+    StrBlobPtr& operator--();
+
+    
+
+    StrBlobPtr operator++(int);
+
+    StrBlobPtr operator--(int);
+
+    
+
+    StrBlobPtr& operator+=(std::size_t n);
+
+    StrBlobPtr operator+(std::size_t n);
+
+};
+
+StrBlobPtr& StrBlobPtr::operator++()
+
+{
+
+    check(curr,"Increment past end of StrBlobPtr");
+
+    ++curr;
+
+    return *this;
+
+}
+
+StrBlobPtr& StrBlobPtr::operator--()
+
+{
+
+    --curr;
+
+    check(curr,"decrement past begin of StrBlobPtr");
+
+    return *this;
+
+}
+
+    
+
+StrBlobPtr StrBlobPtr::operator++(int)
+
+{
+
+    StrBlobPtr ret = *this;
+
+    ++(*this);
+
+    return ret;
+
+}
+
+StrBlobPtr StrBlobPtr::operator--(int)
+
+{
+
+    StrBlobPtr ret = *this;
+
+    --(*this);
+
+    return ret;
+
+}
+
+//返回引用
+
+StrBlobPtr& StrBlobPtr::operator+=(std::size_t n)
+
+{
+
+    curr += n;
+
+    check(curr,"Increment past end of StrBlobPtr");
+
+    return *this;
+
+}
+
+//返回值
+
+StrBlobPtr StrBlobPtr::operator+(std::size_t n)
+
+{
+
+    StrBlobPtr ret = *this;
+
+    cur += n;
+
+    return ret;
+
+}
+
+//————————————————14.7——————————————————
+
+class StrBlobPtr {
+
+public:
+
+    string& operator*() {
+
+        auto p = check(curr,"dereference past end");
+
+        return (*p)[curr];
+
+    }
+
+    
+
+    string* operator->() {
+
+        return & this->operator*();
+
+    }
+
+};
+
+  
+
+int main()
+
+{    
+
+    StrBlob a1 = {"hello","WORD","KFC"};
+
+    StrBlobPtr sbp(a1);
+
+    (*sbp) = "HELLO";
+
+    std::cout << sbp->size() << std::endl;
+
+    std::cout << (*sbp).size() << std::endl;
+
+    return 0;
+
+}
+    
