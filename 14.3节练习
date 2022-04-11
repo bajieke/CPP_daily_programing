@@ -1,0 +1,167 @@
+//14.3节练习
+
+//练习14.15
+
+#include<iostream>
+
+#include<string>
+
+using std::string;
+
+using std::istream;
+
+using std::ostream;
+
+class Book {
+
+public:
+
+    friend istream& operator>>(istream& in,Book&);
+
+    friend ostream& operator<<(ostream& os,const Book&);
+
+    
+
+    friend bool operator==(const Book&,const Book&);
+
+    friend bool operator!=(const Book&,const Book&);
+
+    friend bool operator<(const Book&,const Book&);
+
+    friend bool operator>(const Book&,const Book&);
+
+    
+
+    Book() = default;
+
+    Book(unsigned no,string name,string author,string pubdata,int number):no_(no),name_(name),author_(author),pubdata_(pubdata),number_(number) { }
+
+    Book(istream& in) { in>>*this; }
+
+    
+
+    Book& operator+=(const Book&);
+
+    
+
+private:
+
+    unsigned no_;
+
+    string name_;
+
+    string author_;
+
+    string pubdata_;
+
+    unsigned number_;
+
+};
+
+Book& Book::operator+=(const Book& bk)
+
+{
+
+    this->number_ += bk.number_;
+
+    return *this;
+
+}
+
+istream& operator>>(istream& in,Book& bk)
+
+{
+
+    in >> bk.no_ >> bk.name_ >> bk.author_ >> bk.pubdata_ >> bk.number_;
+
+    if(!in) 
+
+        bk = Book();
+
+    return in;
+
+}
+
+ostream& operator<<(ostream& os,const Book& bk)
+
+{
+
+    os<< bk.no_ << bk.name_ << bk.author_ << bk.pubdata_ << bk.number_;
+
+    return os;
+
+}
+
+    
+
+bool operator==(const Book& lhs,const Book& rhs)
+
+{
+
+    if(lhs.no_ == rhs.no_)
+
+        return true;
+
+}
+
+bool operator!=(const Book& lhs,const Book& rhs)
+
+{
+
+    if(lhs.no_ != rhs.no_)
+
+        return true;
+
+}
+
+bool operator<(const Book& lhs,const Book& rhs)
+
+{
+
+        return lhs.no_ < rhs.no_;
+
+}
+
+bool operator>(const Book& lhs,const Book& rhs)
+
+{
+
+    return lhs.no_ > rhs.no_;
+
+}
+
+    
+
+int main()
+
+{
+
+    Book b1(1234,"西游记","吴承恩","1992.2.3",150);
+
+    Book b2(1004,"红楼梦","曹雪芹","1989.12.30",60);
+
+    
+
+    
+
+    std::cout << "this " << std::endl;
+
+    
+
+    if(b1 > b2)
+
+        std::cout << "b1 > b2" << std::endl;
+
+    else
+
+        std::cout << "b1 < b2" << std::endl;
+
+     
+
+    
+
+    std::cout << b1 << std::endl;
+
+    return 0;
+
+}
