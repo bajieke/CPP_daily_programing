@@ -1,0 +1,44 @@
+//14.7节练习
+
+//练习14.32
+
+class StrBlobPtr;
+
+class StrBlobPtr_point {
+
+public:
+
+    StrBlobPtr_point() = default;
+
+    StrBlobPtr_point(StrBlobPtr* ptr):ptr_(ptr) { }
+
+    
+
+    StrBlobPtr_point& operator*();
+
+    StrBlobPtr_point* operator->();
+
+    
+
+private:
+
+    StrBlobPtr* ptr_ = nullptr;
+
+};
+
+StrBlobPtr_point& StrBlobPtr_point::operator*()
+
+{
+
+    return (*ptr);
+
+}
+
+StrBlobPtr_point* StrBlobPtr_point::operator->()
+
+{
+
+    return ptr;
+
+}
+
