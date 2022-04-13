@@ -1,0 +1,61 @@
+//—————————————14.8.1———————————————————————
+
+//———1———
+
+stable_sort(words.begin(),words.end(),
+
+            [] (const string& a,const string& b) 
+
+               { return a.size() < b.size(); });
+
+            
+
+stable_sort(words.begin(),words.end(),
+
+            ShorterString());
+
+class ShorterString {
+
+public:
+
+    bool operator()(const string& a,const string& b) {
+
+        return a.size() < b.size();
+
+    }
+
+};      
+
+//———2———   
+
+auto wc = find_if(words.begin(),words.end(),
+
+                [sz] (const string& a)
+
+                     { return a.size() >= sz; });
+
+auto wc = find_if(words.begin,words.end(),
+
+                SizeCmp(sz));
+
+                         
+
+class SizeCmp {
+
+public: 
+
+    SizeCmp(size_t sz):sz_(sz) { }
+
+    bool operator()(const string& a) {
+
+        return a.size() >= sz_;
+
+    }
+
+    
+
+private: 
+
+    size_t sz_;
+
+};
