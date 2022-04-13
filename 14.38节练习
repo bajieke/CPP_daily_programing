@@ -1,0 +1,143 @@
+#include<iostream>
+
+#include<string>
+
+#include<map>
+
+using std::cin;
+
+using std::cout;
+
+using std::endl;
+
+using std::size_t;
+
+using std::string;
+
+using std::map;
+
+using std::vector;
+
+class IsInRange {
+
+public:
+
+    IsInRange(size_t lower,size_t upper):lower_(lower),upper_(upper) { }
+
+    
+
+    bool operator()(const string& str) {
+
+        return str.size()>lower_limit() && str.size()<upper_limit();
+
+    }
+
+    
+
+    size_t lower_limit() {
+
+        return lower_;
+
+    }
+
+    
+
+    size_t upper_limit() {
+
+        return upper_;
+
+    }
+
+    
+
+private:
+
+    size_t lower_;
+
+    size_t upper_;
+
+};
+
+int main()
+
+{
+
+    map<size_t, size_t> table_count;
+
+    vector<IsInRange> Ranges;
+
+    
+
+    auto uppers = {2u,3u,4u,5u};
+
+    
+
+    //保存阈值范围 的 函数对象
+
+    for(auto upper : uppers)
+
+        Ranges.push_back(IsInRange{lower,uppers})
+
+    
+
+    //初始化map
+
+    for(auto upper : uppers)
+
+        table_count[upper] = 0;
+
+        
+
+    vector<string> fin{"here","amplify","are"};   
+
+        
+
+        
+
+    
+
+    //遍历文件中的单词，进行统计
+
+    //for(string word; fin>>word; ) {
+
+    for(auto word : fin) {
+
+        //range 是函数对象
+
+        for(auto range : Ranges) {
+
+            //调用每一个函数对象
+
+            if(range(word)) {
+
+                //对应map++
+
+                ++table_count[range.upper_limit()];
+
+            }
+
+        }
+
+    }
+
+    
+
+    for(auto result : table_count) {
+
+        cout << result.first;
+
+        cout << result.second << endl;
+
+    }
+
+    return 0;
+
+}
+
+               
+
+                       
+
+            
+
+                      
