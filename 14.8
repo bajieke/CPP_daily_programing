@@ -1,0 +1,103 @@
+//————————————————————14.8——————————————
+
+#include<iostream>
+
+#include<string>
+
+using std::string;
+
+using std::ostream;
+
+//1.
+
+struct absInt {
+
+    int operator()(int val) {
+
+        return val>0 ? val : -val;
+
+    }
+
+};
+
+//2.
+
+class PrintString {
+
+public:
+
+    PrintString(ostream& o = std::cout,char ch = ' '):
+
+                os(o),seq(ch) { }
+
+    
+
+    void operator()(const string& str) const {
+
+        os << str << seq;
+
+    }
+
+private:
+
+    ostream& os;
+
+    char seq;
+
+};
+
+int main()
+
+{
+
+    //1
+
+    int a1 = 5;
+
+    int b1 = -6;
+
+    
+
+    absInt ai1;
+
+    absInt ai2;
+
+    
+
+    std::cout << ai1(a1) << std::endl;
+
+    std::cout << ai2(b1) << std::endl;
+
+    
+
+    //2
+
+    PrintString ps;
+
+    
+
+    ps.operator()("here");
+
+    ps("WORD");
+
+    
+
+    
+
+    PrintString errors(std::cerr,'\n');
+
+    
+
+    errors("expected errors..");
+
+    errors("expected errors....");
+
+    
+
+    
+
+    return 0;
+
+}
+
+*/
