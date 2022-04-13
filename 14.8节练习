@@ -1,0 +1,221 @@
+//14.8节练习
+
+/*
+
+//练习14.34
+
+#include<iostream>
+
+#include<string>
+
+using std::string;
+
+using std::ostream;
+
+using std::cin;
+
+using std::cout;
+
+using std::endl;
+
+class IfElseThen{
+
+public:
+
+    int operator()(int a,int b,int c) {
+
+        return a ? b : c;
+
+    }
+
+};
+
+int main()
+
+{
+
+    IfElseThen ifet;
+
+    
+
+    cout << ifet(3,80,90) << endl;
+
+    
+
+    cout << ifet(0,80,90) << endl;
+
+    
+
+    return 0;
+
+}
+
+*/
+
+
+
+
+
+
+/*
+
+//14.35节练习
+
+#include<iostream>
+
+#include<string>
+
+#include<vector>
+
+using std::string;
+
+using std::istream;
+
+using std::cin;
+
+using std::cout;
+
+using std::endl;
+
+class CinString {
+
+public:
+
+    CinString(istream& inn = std::cin):in(inn) { }
+
+    
+
+    int operator()() {
+
+        string str;
+
+        
+
+        //in >> str;
+
+        std::getline(in,str);
+
+        
+
+        if(in)
+
+            cout << str << endl;
+
+         else 
+
+            cout << string() << endl;
+
+    }
+
+private:
+
+    istream& in;
+
+};
+
+int main()
+
+{
+
+    CinString cs;
+
+    
+
+    //cs();
+
+    
+
+    
+
+    string tempStr;
+
+    std::vector<string> vec;
+
+    
+
+    while(! (tempStr = cs()).empty()) {
+
+        vec.push_back(tempStr);
+
+    }
+
+    
+
+    for(auto s : vec) 
+
+        cout << s << endl;
+
+    return 0;
+
+}
+
+*/
+
+
+
+
+
+
+
+
+/*
+
+//14.37
+
+#include<iostream>
+
+#include<string>
+
+#include<vector>
+
+#include<algorithm>
+
+using std::cin;
+
+using std::cout;
+
+using std::endl;
+
+class IsEqual {
+
+public:
+
+    IsEqual(int v):val(v) { }
+
+    
+
+    bool operator()(int key) {
+
+        return key == val;
+
+    }
+
+private:
+
+    int val;
+
+};
+
+int main()
+
+{
+
+    std::vector<int> vec{1,2,1,2,5,6,1,2,9};
+
+    
+
+    std::replace_if(vec.begin(),vec.end(),IsEqual(1),8);
+
+    
+
+    for(auto c : vec) 
+
+        cout << c << endl;
+
+    
+
+    
+
+    return 0;
+
+} 
