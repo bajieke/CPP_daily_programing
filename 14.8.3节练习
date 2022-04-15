@@ -1,0 +1,79 @@
+//14.8.3节练习
+
+//练习14.44
+
+#include<iostream>
+
+#include<map>
+
+#include<string>
+
+#include<functional>
+
+//＋
+
+int add(int a,int b)
+
+{
+
+    return a+b;
+
+}
+
+// /
+
+class divide {
+
+public:
+
+    int operator()(int a,int b) const{
+
+        return a/b;
+
+    }
+
+};
+
+//%
+
+auto mod = [](int i, int j) { return (i%j); };
+
+auto binops = std::map<std::string, std::function<int(int, int)>>  
+
+{
+
+    { "+", add },   //函数指针
+
+    { "-", std::minus<int>() },  //标准库函数对象
+
+    { "/", divide() },       //类函数对象
+
+    { "*", [] (int i, int j) { return i * j; } },
+
+    { "%", mod } 
+
+};
+
+int main()
+
+{
+
+    while(true) {
+
+        int a,b;
+
+        std::string s;
+
+        
+
+        std::cin >>a >> b >> s;
+
+        
+
+        std::cout << binops[s](a,b) << std::endl;
+
+    }
+
+    return 0;
+
+}
