@@ -1,0 +1,173 @@
+//15.2.2节练习
+
+#include<iostream>
+
+#include<string>
+
+//基类
+
+class Quote {
+
+public:
+
+    Quote() = default;
+
+    Quote(std::string bookNo,double price):bookNo_(bookNo),price_(price) { }
+
+    
+
+    std::string isbn() const { return bookNo_; }
+
+    
+
+    virtual double net_price(std::size_t n) const 
+
+            { return n * price_; }
+
+    virtual ~Quote() { }
+
+private:
+
+    std::string bookNo_;
+
+protected:
+
+    double price_ = 0.0;
+
+};
+
+//练习15.5
+
+//派生类
+
+class Bulk : public Quote {
+
+public:    
+
+    Bulk() = default;
+
+    Bulk(std::string bookNo, double price, std::size_t min_qty, double discount):
+
+         Quote(bookNo,price),min_qty_(min_qty),discount_(discount)
+
+         { }
+
+    
+
+    //virtual新实现
+
+    double net_price(std::size_t n) const override {
+
+        if(n > min_qty_)
+
+            return n * price_ * (1-discount_);
+
+        else 
+
+            return n * price_;
+
+    }
+
+    
+
+private:
+
+    std::size_t min_qty_;
+
+    double discount_;
+
+};
+
+//练习15.7
+
+class Limit : public Quote {
+
+public:
+
+    Limit() = default;
+
+    Limit(std::string bookNo,double price,size_t max_qty,double discount):
+
+          Quote(bookNo,price),max_qty_(max_qty),discount_(discount)
+
+          { }
+
+    
+
+    //virtual的 新实现
+
+    virtual double net_price(std::size_t n) const override {
+
+        if(n > max_qty_)
+
+            return max_qty_ * price_ * discount_ + (n-max_qty_) * price_;
+
+        else
+
+            return n * price_ * discount_;
+
+    }
+
+private:
+
+    size_t max_qty_;
+
+    double discount_;
+
+};
+
+double print_total(std::ostream& os, const Quote& item, std::size_t n)
+
+{
+
+    double ret = item.net_price(n);
+
+    
+
+    std::cout << item.isbn() << " " << ret << std::endl;
+
+    
+
+    return ret;
+
+}
+
+int main() 
+
+{
+
+    Quote quote("123_456",15.79);
+
+    Bulk bulk("234_567",20.99,2,0.2);
+
+    
+
+    //练习15.6
+
+    print_total(std::cout, quote, 10);
+
+    
+
+    print_total(std::cout, bulk, 1);
+
+    
+
+    print_total(std::cout, bulk, 10);
+
+    
+
+    //派生类
+
+    Limit limit("345_678",33.00,10,0.8);
+
+    print_total(std::cout, limit, 11);
+
+    print_total(std::cout, limit, 10);
+
+    
+
+    
+
+    return 0;
+
+}  
