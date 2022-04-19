@@ -1,0 +1,149 @@
+//15.3节练习
+
+//15.4节练习
+
+#include<iostream>
+
+#include<string>
+
+//练习15.11
+
+class Quote {
+
+public:
+
+    Quote() = default;
+
+    Quote(std::string bookNo,double price):bookNo_(bookNo),price_(price) { }
+
+    
+
+    std::string isbn() const { return bookNo_; }
+
+    
+
+    virtual void Debug() const {
+
+        std::cout << bookNo_ << " "
+
+                  << price_ << std::endl;
+
+    }
+
+    
+
+    virtual double net_price(std::size_t n) const 
+
+            { return n * price_; }
+
+    virtual ~Quote() { }
+
+private:
+
+    std::string bookNo_;
+
+protected:
+
+    double price_ = 0.0;
+
+};  
+
+//抽象基类
+
+class Disc_quote : public Quote{
+
+public:
+
+    Disc_quote() = default;
+
+    Disc_quote(std::string bookNo, double price, std::size_t quantity, double discount):
+
+               Quote(bookNo, price),quantity_(quantity),discount_(discount)
+
+              { }
+
+    //纯虚函数
+
+    virtual double net_price(std::size_t n) const override = 0;
+
+    
+
+protected:
+
+    std::size_t quantity_ = 0;
+
+    double discount_ = 0.0;
+
+};
+
+//抽象基类的派生类
+
+class Bulk_quote : public Disc_quote {
+
+public:
+
+    Bulk_quote() = default;
+
+    Bulk_quote(std::string bookNo, double price, std::size_t quantity, double discount):
+
+              Disc_quote(bookNo, price, quantity, discount)
+
+              { }
+
+    //覆盖纯虚函数
+
+    double net_price(std::size_t n) const override;
+
+    
+
+    void Debug() const override;
+
+};
+
+//练习15.16
+
+class Limit : public Disc_quote {
+
+public:
+
+    Limit() = default;
+
+    Limit(std::string bookNo, double price, std::size_t quantity, double discount):
+
+          Disc_quote(bookNo, price, quantity, discount)
+
+          { }
+
+    
+
+    double net_price(std::size_t n) const override {
+
+        return n * price_ * ((n<quantity_) ? (1-discount_) : 1);
+
+    }
+
+    
+
+    void Debug() const override;
+
+};
+
+int main()
+
+{
+
+    Quote quote("1234_789",67.98);
+
+    
+
+    quote.Debug();
+
+    
+
+    //练习15.17
+
+    //Disc_quote dq("123", 67.90, 10, 0.2);
+
+    return 0;
+
+}
