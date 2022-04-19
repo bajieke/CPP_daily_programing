@@ -1,0 +1,163 @@
+//15.5节练习
+
+//练习15.20
+
+#include<iostream>
+
+//基类
+
+class Base {
+
+public:
+
+     void pub_mem();
+
+    
+
+protected:
+
+    int prot_men;
+
+private:
+
+    char priv_mem;
+
+};
+
+//派生类
+
+class Pub_Derv : public Base {
+
+//public:
+
+//private:
+
+    int f() { return prot_men; }
+
+    
+
+    //不能访问基类，私有成员
+
+    //char g() { return priv_mem; }
+
+    
+
+    void memFcn(Base& b) { b = *this; }
+
+};
+
+class Priv_Derv : private Base {
+
+//public:
+
+    int f1() { return prot_men; }
+
+    
+
+    void memFcn(Base& b) { b = *this; }
+
+};
+
+class Prot_Derv : protected Base {
+
+    int f2() { return prot_men; }
+
+    
+
+    void memFcn(Base& b) { b = *this; }
+
+};
+
+//派生类－2类
+
+struct Derived_from_Public : public Pub_Derv {
+
+    //
+
+    int use_base() { return prot_men; }
+
+    
+
+    void memFcn(Base& b) { b = *this; }
+
+};
+
+struct Derived_from_Private : public Priv_Derv {
+
+    
+
+    //Base::prot_mem 在 Priv_Derv中是私有的
+
+    //int use_base() { return prot_men; }
+
+    
+
+    //只有这里，不让用
+
+    //void memFcn(Base& b) { b = *this; }
+
+};
+
+struct Derived_from_Protected : public Prot_Derv {
+
+    //
+
+    int use_base() { return prot_men; }
+
+    
+
+    void memFcn(Base& b) { b = *this; }
+
+};
+
+int main() 
+
+{
+
+    Base *p = nullptr;
+
+    
+
+    Pub_Derv d1;
+
+    p = &d1;
+
+    
+
+    Prot_Derv d2;
+
+    //p = &d2;
+
+    
+
+    Priv_Derv d3;
+
+    //p = &d3;
+
+    
+
+    
+
+    Derived_from_Public dd1;
+
+    p = &dd1;
+
+    
+
+    Derived_from_Protected dd2;
+
+    //p = &dd2;
+
+    
+
+    Derived_from_Private dd3;
+
+    //p = &dd3;
+
+    
+
+    return 0;
+
+}
+
+    
