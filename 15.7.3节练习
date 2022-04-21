@@ -1,0 +1,335 @@
+//—————————————15.7.3节练习———————————————————————
+
+//15.7.3节练习
+
+#include<iostream>
+
+#include<string>
+
+//基类
+
+class Quote {
+
+    // *this == rhs   会用到
+
+    friend bool operator==(const Quote& lhs, const Quote& rhs);
+
+    friend bool operator!=(const Quote& lhs, const Quote& rhs);
+
+public:
+
+    //构造函数
+
+    Quote() = default;
+
+    Quote(std::string bookNo, double price):
+
+                      bookNo_(bookNo),price_(price)
+
+          { std::cout << "Quote 有参，构造函数" << std::endl; }
+
+    
+
+    //拷贝构造函数
+
+    Quote(const Quote& quote):
+
+                      bookNo_(quote.bookNo_),price_(quote.price_) {
+
+        std::cout << "Quote 拷贝构造函数" << std::endl;
+
+    }
+
+    
+
+    //移动构造函数
+
+    Quote(Quote&& quote) noexcept :
+
+                    bookNo_(std::move(quote.bookNo_)),price_(std::move(quote.price_)){
+
+        std::cout << "Quote 移动构造函数" << std::endl;
+
+    }
+
+    
+
+    //拷贝赋值运算符
+
+    Quote& operator=(const Quote& rhs) {
+
+        if(*this != rhs) {
+
+            bookNo_ = rhs.bookNo_;
+
+            price_ = rhs.price_;
+
+        }
+
+        std::cout << "Quote 拷贝赋值运算符" << std::endl;
+
+        
+
+        return *this;
+
+    }
+
+    
+
+    //移动赋值运算符
+
+    Quote& operator=(Quote&& rhs) noexcept {
+
+        if(*this != rhs) {
+
+            bookNo_ = std::move(rhs.bookNo_);
+
+            price_ = std::move(rhs.price_);
+
+        }
+
+        std::cout << "Quote 移动赋值运算符" << std::endl;
+
+        
+
+        return *this;
+
+    }
+
+    
+
+    //其他
+
+    std::string isbn() const { return bookNo_; }
+
+    
+
+    virtual double net_price(std::size_t n) const {
+
+        return n * price_;
+
+    }
+
+    
+
+    //虚析构函数
+
+    virtual ~Quote() { std::cout << "Quote 析构函数" << std::endl;}
+
+//成员变量
+
+private:
+
+    std::string bookNo_;
+
+    
+
+protected:
+
+    double price_;
+
+};
+
+
+bool operator==(const Quote& lhs, const Quote& rhs)
+
+{
+
+    return lhs.bookNo_ == rhs.bookNo_ &&
+
+           lhs.price_ == rhs.price_;
+
+}
+
+bool operator!=(const Quote& lhs, const Quote& rhs)
+
+{
+
+    return !(lhs == rhs);
+
+}
+
+//派生类
+
+class Disc_quote : public Quote {
+
+public:
+
+    //
+
+    Disc_quote() = default;
+
+    Disc_quote(std::string bookNo, double price, std::size_t quantity, double discount):
+
+               Quote(bookNo, price),quantity_(quantity),discount_(discount)
+
+        { std::cout << "Disc_quote 有参，构造函数" << std::endl;}
+
+    
+
+    //纯虚函数
+
+    virtual double net_price(std::size_t n) const override = 0;
+
+    
+
+    //析构函数
+
+    ~Disc_quote() { std::cout << "Disc_quote 析构函数" << std::endl; }
+
+    
+
+protected:
+
+    std::size_t quantity_;
+
+    double discount_;
+
+};
+
+
+//2层派生类
+
+class Bulk_quote : public Disc_quote {
+
+public:
+
+    //构造函数
+
+    Bulk_quote() = default;
+
+    Bulk_quote(std::string bookNo, double price, std::size_t quantity, double discount):
+
+               Disc_quote(bookNo,price,quantity,discount)
+
+        { std::cout << "Bulk_quote 有参，构造函数" << std::endl; }
+
+   
+
+    //拷贝构造
+
+    Bulk_quote(const Bulk_quote& bq):Disc_quote(bq) {
+
+        //
+
+        std::cout << "Bulk_quote 拷贝构造函数" << std::endl;
+
+    }
+
+    
+
+    //移动构造
+
+    Bulk_quote(Bulk_quote&& bq) noexcept : 
+
+               Disc_quote(std::move(bq))  {
+
+        //
+
+        std::cout << "Bulk_quote 移动构造函数" << std::endl;
+
+    }
+
+    
+
+    //拷贝赋值运算符
+
+    Bulk_quote& operator=(const Bulk_quote& rhs) {
+
+        //
+
+        Disc_quote::operator=(rhs);
+
+        
+
+        std::cout << "Bulk_quote 拷贝赋值运算符" << std::endl;
+
+        
+
+        return *this;
+
+    }
+
+    
+
+    //移动赋值运算符
+
+    Bulk_quote& operator=(Bulk_quote&& rhs) noexcept {
+
+        //
+
+        Disc_quote::operator=(std::move(rhs));
+
+        
+
+        std::cout << "Bulk_quote 移动赋值运算符" << std::endl;
+
+        
+
+        return *this;
+
+    }
+
+    
+
+    //析构函数
+
+    ~Bulk_quote() { std::cout << "Bulk_quote 析构函数" << std::endl;}
+
+    //虚函数
+
+    double net_price(std::size_t n) const override {
+
+        return n * price_ * ((n>quantity_) ? (1-discount_) : 1);
+
+    }
+
+};
+
+int main()
+
+{
+
+    //Quote quote("123", 56.9);
+
+    
+
+    
+
+    //抽象基类不能定义对象
+
+    //Disc_quote disc_q("456", 78.34, 10, 0.2);
+
+    //
+
+    Bulk_quote bulk_q("111", 12.45, 100, 0.2);
+
+    
+
+    std::cout << "-----------" << std::endl;
+
+    
+
+    //拷贝构造
+
+    //Bulk_quote bulk_q2(bulk_q);
+
+    
+
+    //拷贝赋值
+
+    //Bulk_quote bulk_q3 = bulk_q;
+
+    
+
+    
+
+    Bulk_quote bulk_q2(std::move(bulk_q));
+
+    
+
+    return 0;
+
+}
+
+        
